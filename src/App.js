@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, Link } from 'react-router-dom'
 import './App.css';
 
@@ -10,8 +10,13 @@ import { LandingPage,
          AccountPage,
          } from './components'
 
+
+
+
 function App() {
+  
   return (
+    
     <div className="App">
       <NavigationBar />
 
