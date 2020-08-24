@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function TodoSearch() {
+export const TodoSearch = () => {
     return (
         <div>
-            {/* Optional Component */}
+            
         </div>
     )
 }

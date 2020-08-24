@@ -1,7 +1,5 @@
-import { combineReducers } from 'react-redux'
-import { todoReducer } from './todoReducer'
-export { authReducer } from './authReducer'
+import { combineReducers } from 'redux'
+import todoReducer from './todoReducer'
+import authReducer from './authReducer'
 
-const rootReducer = combineReducers({ todo: todoReducer, auth: authReducer})
-
-export default rootReducer
+export default combineReducers({ todo: todoReducer, auth: authReducer})
