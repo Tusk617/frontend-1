@@ -1,6 +1,6 @@
 export { LandingPage } from './LandingPage'
 export { LoginForm } from './LoginForm'
-export { SignUpForm } from './signupForm'
+export { SignUpForm } from './SignUpForm'
 export { AccountPage } from './AccountPage'
 export { NavigationBar } from './NavigationBar'
 export { Todo } from './Todo'

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function NavigationBar() {
+export const NavigationBar = () => {
     return (
         <div>
-            
+            <h1>Hello from the Nav</h1>
         </div>
     )
 }

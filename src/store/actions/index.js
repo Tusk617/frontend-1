@@ -8,7 +8,9 @@ export { LOAD_TODOS,
     DEL_TODO, 
     SELECT_TODO } from './TodoActions';
 
-    export  { SIGN_UP,
-  LOG_ON,
-  EDIT_ACCT,
-  DEL_ACCT } from './AuthActions'
+    export { SIGN_UP_START,
+   SIGN_UP_SUCCESS,
+  SIGN_UP_FAIL,
+  LOG_ON_START,
+  LOG_ON_SUCCESS,
+  LOG_ON_FAIL } from './AuthActions'

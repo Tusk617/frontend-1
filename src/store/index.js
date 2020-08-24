@@ -1,7 +1,4 @@
-const { default: rootReducer } = require("./reducers");
-
 //reducers
-export { rootReducer } from './reducers'
 
 //actions
 export { LOAD_TODOS, 
@@ -10,4 +7,10 @@ export { LOAD_TODOS,
     SUBMIT_TODO, 
     EDIT_TODO, 
     DEL_TODO, 
-    SELECT_TODO } from './actions'
+    SELECT_TODO,
+    SIGN_UP_START,
+    SIGN_UP_SUCCESS,
+   SIGN_UP_FAIL,
+   LOG_ON_START,
+   LOG_ON_SUCCESS,
+   LOG_ON_FAIL} from './actions'
