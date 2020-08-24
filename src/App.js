@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import './App.css';
 
 import { LandingPage,
@@ -14,9 +14,8 @@ function App() {
   return (
     <div className="App">
       <NavigationBar />
-
       <Route path="home" component={LandingPage} />
-      <Route path="/login" component={LoginForm} />
+      <Route path="/login" component={() => <LoginForm form={login}/>}/>
       <Route path="/signup" component={SignUpForm} />
       <Route path="/agenda" component={TodosContainer} />
       <Route path="/account" component={AccountPage} />

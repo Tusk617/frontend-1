@@ -1,26 +1,26 @@
-import React from 'react'
-import { useHistory } from "react-router-dom";
-import axios from 'axios'
+// import React from 'react'
+// import { Link, useHistory } from "react-router-dom";
+// import axiosWithAuth from "../utils/axiosWithAuth";
 
-export default function LandingPage() {
-    const Home = () => {
-        const { location } = useHistory();
-        const { updateRecipes } = useContext(RecipeContext);
+// export const LandingPage = () => {
+
+//     const { location } = useHistory();
+//     const { updateNotes } = useContext();
     
-        useEffect(() => {
-            axiosWithAuth()
-              .get("/recipes")
-              .then(res => {
-                  console.log(res.data)
-                updateRecipes(res.data)
-              } )
-              .catch(err => console.log(err.response));
-          }, [location]);
+//     useEffect(() => {
+//         axiosWithAuth()
+//             .get("")
+//             .then(res => {
+//                 console.log(res.data)
+//                 updateNotes(res.data)
+//               } )
+//             .catch(err => console.log(err.response));
+//           }, [location]);
     
-        return (
-            <div>
-            </div>
-        )
-    };
-}
-    export default Home;
+//     return (
+//         <div>
+
+//         </div>
+//     )
+// }
+

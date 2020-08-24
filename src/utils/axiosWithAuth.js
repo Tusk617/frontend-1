@@ -1,7 +1,14 @@
-import axios from 'axios'
+import axios from "axios";
 
-export default function axiosWithAuth() {
-    return (
-        
-    )
-}
+const axiosWithAuth = () => {
+  const token = window.localStorage.getItem("token");
+
+  return axios.create({
+    headers: {
+      Authorization: token
+    },
+    baseURL: "https://secret-family-recipes-2-api.herokuapp.com"
+  });
+};
+
+export default axiosWithAuth;
