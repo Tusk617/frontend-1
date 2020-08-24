@@ -1,3 +1,4 @@
+import {LOAD_TODOS, LOAD_TODOS_SUCCESS, LOAD_TODOS_FAILURE, SUBMIT_TODO, EDIT_TODO, DEL_TODO, SELECT_TODO} from '../'
 const initialState = {
     todos: [],
     selectedTodo: "" , // The ID of selected TODO
@@ -5,7 +6,7 @@ const initialState = {
     error: ""
 }
 
-export default (state = initialState, { type, payload }) => {
+const todoReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case LOAD_TODOS:
             return { ...state,
@@ -32,3 +33,5 @@ export default (state = initialState, { type, payload }) => {
             return state
     }
 }
+
+export default todoReducer

@@ -7,11 +7,11 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { rootReducer } from './store'
+import reducer from './store/reducers'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
-const store= createStore( rootReducer, applyMiddleware(logger, thunk))
+const store= createStore( reducer, applyMiddleware(logger, thunk))
 
 ReactDOM.render(
   <React.StrictMode>
