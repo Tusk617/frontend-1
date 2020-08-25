@@ -5,9 +5,9 @@ import * as yup from 'yup';
 import axios from 'axios';
 import styled from 'styled-components'
 
-const styledDiv = div {
-    
-}
+const styledDiv = styled.div`
+
+`
 
 const initialValue = {
     username:'',
@@ -77,6 +77,7 @@ export const LoginForm = (props) => {
 
 
     return (
+    <styledDiv>
                 <form onSubmit={Submit}>
                     <h1>
                         Login<br />
@@ -104,5 +105,10 @@ export const LoginForm = (props) => {
                     </label>
                     <button disabled={disabled}>Login</button>
                 </form>
+
+    
+
+    </styledDiv>
+
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const AccountPage = () => {
+export const CreateTodo = () => {
     return (
         <div>
             
