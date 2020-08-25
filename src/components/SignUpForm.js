@@ -77,7 +77,7 @@ export const SignUpForm = (props) => {
 
       const postNewUser = user => {
         dispatch({ type: SIGN_UP_START, payload: user})
-        axios.post('https://reqres.in/api/users', user)
+        axios.post('https://git.heroku.com/wonderlist-backend.git/users/register', user)
         .then(res =>{
           dispatch({ type: SIGN_UP_SUCCESS, payload: res.data})
           setUsers([res.data, ...users])
