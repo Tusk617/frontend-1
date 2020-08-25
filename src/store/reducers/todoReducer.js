@@ -1,21 +1,32 @@
-import {LOAD_TODOS, LOAD_TODOS_SUCCESS, LOAD_TODOS_FAILURE, SUBMIT_TODO, EDIT_TODO, DEL_TODO, SELECT_TODO} from '../'
+import {LOAD_START, LOAD_SUCCESS, LOAD_FAILURE, SUBMIT_TODO, /* EDIT_TODO, DEL_TODO, SELECT_TODO*/} from '../'
 const initialState = {
     todos: [],
-    selectedTodo: "" , // The ID of selected TODO
+    // selectedTodo: "" , // The ID of selected TODO
     loading: false,
     error: ""
+    //todoFormOpen: false
+}
+
+const initTodoValues = {
+    itemID: "",
+    name: "",
+    description: "",
+    dueDate: "",
+    frequency: "",
+    // selected: false,
+
 }
 
 const todoReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case LOAD_TODOS:
+        case LOAD_START:
             return { ...state,
                     loading: true };
-        case LOAD_TODOS_SUCCESS:
+        case LOAD_SUCCESS:
             return { ...state,
                     todos: payload,
                     loading: false }
-        case LOAD_TODOS_FAILURE:
+        case LOAD_FAILURE:
             return { ...state,
                      loading: false,
                      error: payload}

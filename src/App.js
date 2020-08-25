@@ -10,8 +10,8 @@ import { LandingPage,
          LoginForm,
          SignUpForm,
          NavigationBar,
-         TodosContainer,
-         AccountPage,
+         HomePage,
+         AccountSettings,
          PrivateRoute
          } from './components'
 
@@ -27,8 +27,8 @@ function App() {
       <Route path="home" component={LandingPage} />
       <Route path="/login" component={() => <LoginForm/>}/>
       <Route path="/signup" component={SignUpForm} />
-      <PrivateRoute path="/agenda" component={TodosContainer} />
-      <PrivateRoute path="/account" component={AccountPage} />
+      <PrivateRoute path="/home" component={HomePage} />
+      <PrivateRoute path="/account" component={AccountSettings} />
     </div>
   );
 }

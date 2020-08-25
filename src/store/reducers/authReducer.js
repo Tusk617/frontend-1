@@ -5,49 +5,46 @@ import {
     LOG_ON_START,
     LOG_ON_SUCCESS,
     LOG_ON_FAIL,
+    LOAD_START
     // LOG_OUT,
     // EDIT_ACCT,
     // DEL_ACCT,
-} from '../'
+} from '..'
 
 const initialState = {
-    // isLoggedIn : false,
-    firstName : "",
-    lastName : "",
-    username : "",
-    password : "",
-    email : "",
-    error : "", 
-    // theme = null,
-
+    user : {
+        userID: "",
+        username: "",
+        password: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        todos: [],
+        isLoggedIn: true,
+    },
+    loading: false,
+    error: ""
 }
 
  const authReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-
-    case SIGN_UP_START:
-        return { ...state, ...payload }
-    case SIGN_UP_SUCCESS:
-        return { ...state, ...payload }
-    case SIGN_UP_FAIL :
-        return { ...state, ...payload }
-    case LOG_ON_START:
-        return { ...state, ...payload }
-    case LOG_ON_SUCCESS:
-        return { ...state, ...payload }
-    case LOG_ON_FAIL:
-        return { ...state, ...payload }
-    // case LOG_OUT:
-    //     return { ...state, ...payload }
-    // case EDIT_ACCT:
-    //     return { ...state, ...payload }
-    // case DEL_ACCT:
-    //     return { ...state, ...payload }
-                            
-
-
-    default:
-        return state
+        case LOAD_START: 
+            return { ...state, loading: true, }
+        case SIGN_UP_START:
+            return { ...state}
+        case SIGN_UP_SUCCESS:
+            return { ...state, user: { ...payload, isLoggedIn: true }, loading: false }
+        case SIGN_UP_FAIL :
+            return { ...state, error : payload, loading: false }
+        case LOG_ON_START:
+            return { ...state, loading: true }
+        case LOG_ON_SUCCESS:
+            return { ...state, user:{...payload, isLoggedIn: true}, loading: false }
+        case LOG_ON_FAIL:
+            return { ...state, error: payload, loading: false }
+        
+        default:
+            return state
     }
 }
 
