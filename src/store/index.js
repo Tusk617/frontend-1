@@ -1,5 +1,5 @@
 //reducers
-
+export { reducer } from './reducers/reducer'
 //actions
 export { LOAD_START, 
     LOAD_SUCCESS, 

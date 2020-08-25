@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import SignupSchema from './SignupSchema'
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -13,13 +13,27 @@ const initialFormValues={
     username: '',
     email: '',
     password: '',
-  }
+}
+const initialErrors={
+    nameFirst:'',
+    nameLast: '',
+    username: '',
+    email: '',
+    password: '',
+}
 
 
 export const SignUpForm = (props) => {
     const [form, setForm] = useState(initialFormValues)
-    const [errors, setErrors] = useState()
+    const [errors, setErrors] = useState(initialErrors)
     const [users, setUsers] = useState([])
+    const [buttonDisabled, setButtonDisabled] = useState(true)
+
+    useEffect(() => {
+        SignupSchema.isValid(form).then(valid => {
+          setButtonDisabled(!valid);
+        });
+      }, [form]);
 
     const dispatch = useDispatch() 
     
@@ -78,6 +92,13 @@ export const SignUpForm = (props) => {
 
     return (
         <div>
+            <div>
+            {errors.nameFirst}
+            {errors.nameLast}
+            {errors.username}
+            {errors.email}
+            {errors.password}
+            </div>
             <form onSubmit={handleSubmit}>
                 <label>
                     First Name
@@ -110,6 +131,7 @@ export const SignUpForm = (props) => {
                     Email
                     <input 
                     name='email'
+                    type='email'
                     value={form.email}
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
@@ -125,7 +147,7 @@ export const SignUpForm = (props) => {
                     </input>
                 </label>
                 <br />
-                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleSubmit} disabled={buttonDisabled}>Submit</button>
             </form>
         </div>
     )

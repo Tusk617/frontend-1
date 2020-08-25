@@ -6,7 +6,7 @@ const axiosWithAuth = () => {
 
     console.log("Making Req")
     return axios.create({
-        baseURL: "https://git.heroku.com/wonderlist-backend.git",
+        baseURL: "http://wonderlist-backend.herokuapp.com/",
         headers: {
             Authorization: JSON.parse(localStorage.getItem("token"))
         }
