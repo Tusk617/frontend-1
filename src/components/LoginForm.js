@@ -72,6 +72,7 @@ export const LoginForm = (props) => {
 
 
     return (
+
                 <form onSubmit={Submit}>
                     <h1>
                         Login<br />
@@ -99,5 +100,10 @@ export const LoginForm = (props) => {
                     </label>
                     <button disabled={disabled}>Login</button>
                 </form>
+
+        <div>
+
+        </div>
+
     )
 }

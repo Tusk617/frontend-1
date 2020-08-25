@@ -1,14 +1,17 @@
 import axios from "axios";
 
 const axiosWithAuth = () => {
+
   const token = window.localStorage.getItem("token");
 
-  return axios.create({
-    headers: {
-      Authorization: token
-    },
-    baseURL: "https://secret-family-recipes-2-api.herokuapp.com"
-  });
-};
+    console.log("Making Req")
+    return axios.create({
+        baseURL: "https://git.heroku.com/wonderlist-backend.git",
+        headers: {
+            Authorization: JSON.parse(localStorage.getItem("token"))
+        }
+    })
+}
 
-export default axiosWithAuth;
+export default axiosWithAuth
+
