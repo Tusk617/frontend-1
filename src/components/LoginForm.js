@@ -5,7 +5,9 @@ import * as yup from 'yup';
 import axios from 'axios';
 import styled from 'styled-components'
 
-const styledDiv = 
+const styledDiv = div {
+    
+}
 
 const initialValue = {
     username:'',
