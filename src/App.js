@@ -8,7 +8,8 @@ import { LandingPage,
          NavigationBar,
          HomePage,
          AccountSettings,
-         PrivateRoute
+         PrivateRoute,
+         CreateTodo
          } from './components'
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route path="home" component={LandingPage} />
       <Route path="/login" component={() => <LoginForm/>}/>
       <Route path="/signup" component={SignUpForm} />
+      <Route path="/agenda/newtask" component={CreateTodo} />
       <PrivateRoute path="/home" component={HomePage} />
       <PrivateRoute path="/account" component={AccountSettings} />
     </div>

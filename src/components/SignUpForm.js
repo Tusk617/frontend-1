@@ -78,7 +78,7 @@ export const SignUpForm = (props) => {
         }
         postNewUser(newUser)
         setForm(initialFormValues)
-      }
+    }
 
       const postNewUser = user => {
         dispatch({ type: SIGN_UP_START, payload: user})
