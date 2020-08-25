@@ -4,22 +4,27 @@ import loginSchema from './LoginSchema';
 import * as yup from 'yup';
 import axios from 'axios';
 
+const initialValue = {
+    username:'',
+    password:'',
+    email:'',
+}
+
+   const initialError = {
+    username:'',
+    password:'',
+    email:'',
+} 
 
 export const LoginForm = (props) => {
 
     const History = useHistory();
  
-    const [ login, setLogin ] = useState({
-        username:'',
-        password:'',
-        email:'',
-    })
-    const [ errors, setErrors ] = useState({
-        username:'',
-        password:'',
-        email:'',
-    })
+    const [ login, setLogin ] = useState(initialValue)
+    const [ errors, setErrors ] = useState(initialError)
     const [ disabled, setdisabled ] = useState(false);
+
+   
 
     const FormState = e => {
         const name = e.target.name;
