@@ -5,7 +5,10 @@ import {
     LOG_ON_START,
     LOG_ON_SUCCESS,
     LOG_ON_FAIL,
-    LOAD_START
+    LOAD_START,
+    LOAD_SUCCESS,
+    LOAD_FAILURE,
+    SUBMIT_TODO,
     // LOG_OUT,
     // EDIT_ACCT,
     // DEL_ACCT,
@@ -26,26 +29,37 @@ const initialState = {
     error: ""
 }
 
- const authReducer = (state = initialState, { type, payload }) => {
+const initTodoValues = {
+    itemID: "",
+    name: "",
+    description: "",
+    dueDate: "",
+    frequency: "",
+    // selected: false,
+
+}
+
+ export const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case LOAD_START: 
+        case LOAD_START : 
+        case SIGN_UP_START: 
+        case LOG_ON_START:
             return { ...state, loading: true, }
-        case SIGN_UP_START:
-            return { ...state}
+        case LOAD_SUCCESS:
+            return { ...state,
+                    todos: payload,
+                    loading: false }
         case SIGN_UP_SUCCESS:
+        case LOG_ON_SUCCESS:
             return { ...state, user: { ...payload, isLoggedIn: true }, loading: false }
         case SIGN_UP_FAIL :
-            return { ...state, error : payload, loading: false }
-        case LOG_ON_START:
-            return { ...state, loading: true }
-        case LOG_ON_SUCCESS:
-            return { ...state, user:{...payload, isLoggedIn: true}, loading: false }
         case LOG_ON_FAIL:
-            return { ...state, error: payload, loading: false }
-        
+        case LOAD_FAILURE:
+            return { ...state, error : payload, loading: false }
+        case SUBMIT_TODO:
+            return { ...state, 
+                    todos: [...state.todos, payload] };
         default:
             return state
     }
 }
-
-export default authReducer
