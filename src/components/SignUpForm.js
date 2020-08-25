@@ -7,6 +7,8 @@ import axios from 'axios';
 import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
 
+/* Post needs username, password, email, firstname, lastname */
+
 const initialFormValues={
     nameFirst:'',
     nameLast: '',
@@ -28,6 +30,9 @@ export const SignUpForm = (props) => {
     const [errors, setErrors] = useState(initialErrors)
     const [users, setUsers] = useState([])
     const [buttonDisabled, setButtonDisabled] = useState(true)
+    const config = {
+        headers: { Authorization: `Bearer b37f00fc-8e1f-4028-9acf-9a1f74fd7bf9` }
+    };
 
     useEffect(() => {
         SignupSchema.isValid(form).then(valid => {
@@ -65,11 +70,11 @@ export const SignUpForm = (props) => {
     const handleSubmit = (e) =>{
         e.preventDefault()
         const newUser ={
-            nameFirst: form.nameFirst.trim(),
-            nameLast: form.nameLast.trim(),
             username: form.username.trim(),
-            email: form.email.trim(),
             password: form.password.trim(),
+            email: form.email.trim(),
+            firstname: form.nameFirst.trim(),
+            lastname: form.nameLast.trim(),
         }
         postNewUser(newUser)
         setForm(initialFormValues)
@@ -77,7 +82,7 @@ export const SignUpForm = (props) => {
 
       const postNewUser = user => {
         dispatch({ type: SIGN_UP_START, payload: user})
-        axios.post('https://reqres.in/api/users', user)
+        axios.post('http://wonderlist-backend.herokuapp.com/users/register', user, config)
         .then(res =>{
           dispatch({ type: SIGN_UP_SUCCESS, payload: res.data})
           setUsers([res.data, ...users])
