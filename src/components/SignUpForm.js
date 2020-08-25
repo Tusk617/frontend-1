@@ -3,6 +3,10 @@ import SignupSchema from './SignupSchema'
 import * as Yup from 'yup';
 import axios from 'axios';
 
+//redux
+import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
+import { useDispatch, useSelector } from 'react-redux'
+
 const initialFormValues={
     nameFirst:'',
     nameLast: '',
@@ -16,6 +20,8 @@ export const SignUpForm = (props) => {
     const [form, setForm] = useState(initialFormValues)
     const [errors, setErrors] = useState()
     const [users, setUsers] = useState([])
+
+    const dispatch = useDispatch() 
     
 
     const handleChange = (e) =>{
@@ -55,14 +61,18 @@ export const SignUpForm = (props) => {
         setForm(initialFormValues)
       }
 
-      const postNewUser = user =>{
-        axios.post('https://reqres.in/api/users', user)
+      const postNewUser = user => {
+        dispatch({ type: SIGN_UP_START, payload: user})
+        axios.post('https://git.heroku.com/wonderlist-backend.git/', user)
         .then(res =>{
+          dispatch({ type: SIGN_UP_SUCCESS, payload: res.data})
           setUsers([res.data, ...users])
           console.log(res.data);
         })
         .catch(err =>{
           debugger
+          console.log(err)
+          dispatch({ type: SIGN_UP_FAIL, payload: err })
         })
       }
 
@@ -77,6 +87,7 @@ export const SignUpForm = (props) => {
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
                 </label>
+                <br />
                 <label>
                     Last Name
                     <input 
@@ -85,6 +96,7 @@ export const SignUpForm = (props) => {
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
                 </label>
+                <br />
                 <label>
                     User Name
                     <input 
@@ -93,6 +105,7 @@ export const SignUpForm = (props) => {
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
                 </label>
+                <br />
                 <label>
                     Email
                     <input 
@@ -101,15 +114,18 @@ export const SignUpForm = (props) => {
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
                 </label>
+                <br />
                 <label>
                     Password
                     <input 
                     name='password'
+                    type='password'
                     value={form.password}
                     onChange={(e) =>{handleChange(e)}} >
                     </input>
                 </label>
-                <button>Submit</button>
+                <br />
+                <button onClick={handleSubmit}>Submit</button>
             </form>
         </div>
     )
