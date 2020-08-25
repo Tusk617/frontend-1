@@ -98,13 +98,5 @@ export const LoginForm = (props) => {
                     </label>
                     <button disabled={disabled}>Login</button>
                 </form>
-<<<<<<< HEAD
-
-    
-
-    </styledDiv>
-
-=======
->>>>>>> 84ed3bb2b4af38a5469df1a6db12dd3aa728c59f
     )
 }
