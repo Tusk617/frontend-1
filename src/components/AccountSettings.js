@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const AccountPage = () => {
+export const AccountSettings = () => {
     return (
         <div>
-            
+        
         </div>
     )
 }

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, Link } from 'react-router-dom'
-import './App.css';
 
+import './App.css';
 import { LandingPage,
          LoginForm,
          SignUpForm,
          NavigationBar,
-         TodosContainer,
-         AccountPage,
+         HomePage,
+         AccountSettings,
          PrivateRoute
          } from './components'
 
@@ -20,12 +20,11 @@ function App() {
     
     <div className="App">
       <NavigationBar />
-
       <Route path="home" component={LandingPage} />
-      <Route path="/login" component={LoginForm} />
+      <Route path="/login" component={() => <LoginForm/>}/>
       <Route path="/signup" component={SignUpForm} />
-      <PrivateRoute path="/agenda" component={TodosContainer} />
-      <PrivateRoute path="/account" component={AccountPage} />
+      <PrivateRoute path="/home" component={HomePage} />
+      <PrivateRoute path="/account" component={AccountSettings} />
     </div>
   );
 }
