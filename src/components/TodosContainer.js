@@ -1,5 +1,5 @@
 import React from 'react'
-import { Todo } from './'
+import { Todo, AddTodo } from './'
 
 export const TodosContainer = ({ todos }) => {
     console.log(todos)
@@ -9,7 +9,10 @@ export const TodosContainer = ({ todos }) => {
                 todos ? 
                     todos.map( todo => {
                         return (
-                            <Todo todo={todo} />
+                            <div>
+                                <Todo todo={todo} />
+                                <AddTodo></AddTodo>
+                            </div>
                         )
                     })
                     : <></>
