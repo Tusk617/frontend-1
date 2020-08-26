@@ -12,16 +12,20 @@ const StyledDiv = styled.div`
     h4 {
         color: #a09f9c; /*mountain mist*/
     };
+    h4:hover{
+      color: #424242;
+    }
     button:hover {
-        background-color: #0d857b;/*surfie green*/
+        background-color: #0d857b; /*surfie green*/
         color: white;
     };
     button {
         background-color: #eaeae6; /*gallery*/
         color: black;
-
+        padding: 1.2% 8%;
     }
-    
+
+
 `
 
 const initialValue = {
@@ -94,23 +98,25 @@ export const LoginForm = (props) => {
             <StyledDiv>
                 <form onSubmit={submit}>
                     <h1>
-                        Login<br />
+                        Login
+                        <br />
                     </h1>
 
                     {/* Username */}
                     <label htmlFor='username'>
                         <h4>Username:</h4>
                         <input name='username' type='text' onChange={FormState}/><br />
-                        {login.username.length < 2 ? (<p className="error">{errors.username}</p>) : ''}<br />
+                        {login.username.length < 3 ? (<p className="error">{errors.username}</p>) : ''}<br />
                     </label>
 
                     {/* Password */}
                     <label htmlFor='password'>
                     <h4>Password:</h4>
                         <input name='password' type='password' onChange={FormState} /><br />
-                        {login.password.length < 2 ? (<p className="error">{errors.password}</p>) : ''}<br />
+                        {login.password.length < 5 ? (<p className="error">{errors.password}</p>) : ''}<br />
                     </label>
                     <button disabled={disabled}>Login</button>
+
                 </form>
         </StyledDiv>        
     )
