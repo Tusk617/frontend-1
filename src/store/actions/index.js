@@ -1,7 +1,7 @@
 export { LOAD_START, 
     LOAD_SUCCESS, 
     LOAD_FAILURE, 
-    SUBMIT_TODO, 
+    SUBMIT_TODO_LIST, 
     EDIT_TODO, 
     DEL_TODO, 
     SELECT_TODO } from './TodoActions';

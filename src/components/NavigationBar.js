@@ -1,11 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { LOAD_SUCCESS } from '../store'
+import { useSelector } from 'react-redux'
+// import { LOAD_SUCCESS } from '../store'
 
 export const NavigationBar = () => {
-    const dispatch = useDispatch()
     const loggedIn = useSelector( state => state.user.isLoggedIn )
     return (
         <header>

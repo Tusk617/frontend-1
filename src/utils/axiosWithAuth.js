@@ -1,14 +1,11 @@
 import axios from "axios";
 
 const axiosWithAuth = () => {
-
-  const token = window.localStorage.getItem("token");
-
-    console.log("Making Req")
+    const token = JSON.stringify(window.localStorage.getItem("token"));
     return axios.create({
         baseURL: "http://wonderlist-backend.herokuapp.com/",
         headers: {
-            Authorization: JSON.parse(localStorage.getItem("token"))
+            Authorization: token
         }
     })
 }
