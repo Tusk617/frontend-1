@@ -1,17 +1,18 @@
 import React from 'react'
-import { Todo, AddTodo } from './'
+import { CreateList, TodoList } from './' 
 
-export const TodosContainer = ({ todos }) => {
-    console.log(todos)
+export const TodosContainer = ({ todolists }) => {
     return (
         <section className="todos-container">
+            <CreateList />
             { 
-                todos ? 
-                    todos.map( todo => {
+                todolists ? 
+                    todolists.map( list => {
+                        console.log(list)
                         return (
                             <div>
-                                <Todo todo={todo} />
-                                <AddTodo></AddTodo>
+                                <TodoList list={list} key={todolists.todoID} />
+                                
                             </div>
                         )
                     })

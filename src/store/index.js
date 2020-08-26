@@ -13,4 +13,6 @@ export { LOAD_START,
    SIGN_UP_FAIL,
    LOG_ON_START,
    LOG_ON_SUCCESS,
-   LOG_ON_FAIL} from './actions'
+   LOG_ON_FAIL,
+   CREATE_LIST_START
+} from './actions'

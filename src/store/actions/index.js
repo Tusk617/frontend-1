@@ -4,7 +4,9 @@ export { LOAD_START,
     SUBMIT_TODO_LIST, 
     EDIT_TODO, 
     DEL_TODO, 
-    SELECT_TODO } from './TodoActions';
+    SELECT_TODO,
+    CREATE_LIST_START
+} from './TodoActions';
 
     export { SIGN_UP_START,
    SIGN_UP_SUCCESS,

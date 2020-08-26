@@ -2,7 +2,6 @@ import axiosWithAuth from './axiosWithAuth'
 // import { useParams } from 'react-router-dom'
 
 function fetchAccountDetails (user) {
-    console.log(user)
     const { username } = user
     
     return axiosWithAuth()

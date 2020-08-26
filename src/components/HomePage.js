@@ -26,7 +26,7 @@ export const HomePage = () => {
     return (
         <div>
             <h2>Homepage</h2>
-                <TodosContainer todos={user.todolists}/>
+                <TodosContainer todolists={user.todolists}/>
 
         </div>
     )
