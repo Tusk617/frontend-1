@@ -1,4 +1,0 @@
-Questions for Support: 
-   a.)  Given that we have two reducers (one for user auth and one for todo CRUD)
-        how can we link the state for our user and their todos?
-   b.)  How 

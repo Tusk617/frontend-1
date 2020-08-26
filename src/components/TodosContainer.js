@@ -1,9 +1,22 @@
 import React from 'react'
+import { Todo, AddTodo } from './'
 
-export const TodosContainer = () => {
+export const TodosContainer = ({ todos }) => {
+    console.log(todos)
     return (
-        <div>
-            
-        </div>
+        <section className="todos-container">
+            { 
+                todos ? 
+                    todos.map( todo => {
+                        return (
+                            <div>
+                                <Todo todo={todo} />
+                                <AddTodo></AddTodo>
+                            </div>
+                        )
+                    })
+                    : <></>
+            }
+        </section>
     )
 }

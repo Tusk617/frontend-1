@@ -1,13 +1,31 @@
 import React, {useState, useEffect} from 'react'
 import SignupSchema from './SignupSchema'
+import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup';
 import axios from 'axios';
-
+import styled from 'styled-components'
 //redux
 import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
 
-/* Post needs username, password, email, firstname, lastname */
+const StyledDiv = styled.div`
+  font-family: 'Poppins';
+    h4 {
+        color: #a09f9c; /*mountain mist*/
+    };
+    h4:hover{
+      color: #424242;
+    }
+    button:hover {
+        background-color: #0d857b; /*surfie green*/
+        color: white;
+    };
+    button {
+        background-color: #eaeae6; /*gallery*/
+        color: black;
+        padding: 1.2% 8%;
+    }
+`
 
 const initialFormValues={
     nameFirst:'',
@@ -26,13 +44,10 @@ const initialErrors={
 
 
 export const SignUpForm = (props) => {
-    const [form, setForm] = useState(initialFormValues)
-    const [errors, setErrors] = useState(initialErrors)
-    const [users, setUsers] = useState([])
-    const [buttonDisabled, setButtonDisabled] = useState(true)
-    const config = {
-        headers: { Authorization: `Bearer b37f00fc-8e1f-4028-9acf-9a1f74fd7bf9` }
-    };
+  const reqErr = useSelector(state => state.error)
+  const [form, setForm] = useState(initialFormValues)
+  const [errors, setErrors] = useState(initialErrors)
+  const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
         SignupSchema.isValid(form).then(valid => {
@@ -40,7 +55,9 @@ export const SignUpForm = (props) => {
         });
       }, [form]);
 
-    const dispatch = useDispatch() 
+
+  const dispatch = useDispatch() 
+  const { push } = useHistory()
     
 
     const handleChange = (e) =>{
@@ -81,32 +98,41 @@ export const SignUpForm = (props) => {
     }
 
       const postNewUser = user => {
-        dispatch({ type: SIGN_UP_START, payload: user})
-        axios.post('http://wonderlist-backend.herokuapp.com/users/register', user, config)
+        dispatch({ type: SIGN_UP_START })
+        axios.post('https://cors-anywhere.herokuapp.com/https://wonderlist-backend.herokuapp.com/register', user)
         .then(res =>{
-          dispatch({ type: SIGN_UP_SUCCESS, payload: res.data})
-          setUsers([res.data, ...users])
-          console.log(res.data);
+          dispatch({ type: SIGN_UP_SUCCESS, payload: user})
+          window.localStorage.setItem('token', res.data.access_token)
+          push('/hompage')
         })
         .catch(err =>{
           debugger
-          console.log(err)
           dispatch({ type: SIGN_UP_FAIL, payload: err })
+          if ( reqErr.includes("status code 500")){
+            setErrors("Sorry, that username has already been taken")
+            setForm({
+              ...form,
+              username: initialFormValues.username
+            })
+          }
         })
       }
 
     return (
-        <div>
+        <StyledDiv>
             <div>
-            {errors.nameFirst}
-            {errors.nameLast}
-            {errors.username}
-            {errors.email}
-            {errors.password}
+            {errors? errors.nameFirst : <></>}
+            {errors? errors.nameLast : <></>}
+            {errors? errors.username : <></>}
+            {errors? errors.email : <></>}
+            {errors? errors.password : <></>}
             </div>
             <form onSubmit={handleSubmit}>
+              <h1>
+                Signup
+              </h1>
                 <label>
-                    First Name
+                    <h4>First Name</h4>
                     <input
                     name='nameFirst'
                     value={form.nameFirst}
@@ -115,7 +141,7 @@ export const SignUpForm = (props) => {
                 </label>
                 <br />
                 <label>
-                    Last Name
+                <h4>Last Name</h4>
                     <input 
                     name='nameLast'
                     value={form.nameLast}
@@ -124,7 +150,7 @@ export const SignUpForm = (props) => {
                 </label>
                 <br />
                 <label>
-                    User Name
+                <h4>Username</h4>
                     <input 
                     name='username'
                     value={form.username}
@@ -133,7 +159,7 @@ export const SignUpForm = (props) => {
                 </label>
                 <br />
                 <label>
-                    Email
+                <h4>Email</h4>
                     <input 
                     name='email'
                     type='email'
@@ -143,7 +169,7 @@ export const SignUpForm = (props) => {
                 </label>
                 <br />
                 <label>
-                    Password
+                <h4>Password</h4>
                     <input 
                     name='password'
                     type='password'
@@ -152,8 +178,10 @@ export const SignUpForm = (props) => {
                     </input>
                 </label>
                 <br />
+                <br/>
+                <br/>
                 <button onClick={handleSubmit} disabled={buttonDisabled}>Submit</button>
             </form>
-        </div>
+        </StyledDiv>
     )
 }

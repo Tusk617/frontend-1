@@ -2,10 +2,31 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import loginSchema from './LoginSchema';
 import * as yup from 'yup';
-
+import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { LOG_ON_START, LOG_ON_SUCCESS, LOG_ON_FAIL } from '../store'
 import axios from 'axios'
+
+const StyledDiv = styled.div`
+    font-family: 'Poppins';
+    h4 {
+        color: #a09f9c; /*mountain mist*/
+    };
+    h4:hover{
+      color: #424242;
+    }
+    button:hover {
+        background-color: #0d857b; /*surfie green*/
+        color: white;
+    };
+    button {
+        background-color: #eaeae6; /*gallery*/
+        color: black;
+        padding: 1.2% 8%;
+    }
+
+
+`
 
 const initialValue = {
     username:'',
@@ -18,15 +39,12 @@ const initialValue = {
 } 
 
 export const LoginForm = (props) => {
-
     const dispatch = useDispatch();
-    const History = useHistory();
+    const history = useHistory();
  
     const [ login, setLogin ] = useState(initialValue);
     const [ errors, setErrors ] = useState(initialError);
     const [ disabled, setdisabled ] = useState(false);
-
-   
 
     const FormState = e => {
         const name = e.target.name;
@@ -62,12 +80,13 @@ export const LoginForm = (props) => {
         dispatch({ type: LOG_ON_START})
         axios.post("http://wonderlist-backend.herokuapp.com/login",  `grant_type=password&username=${login.username}&password=${login.password}`, {headers: {
             // btoa is converting our client id/client secret into base64
-            Authorization: `Basic ${btoa('wunder3-client:wunder3-secret')}`,
-            'Content-Type': 'application/x-www-form-urlencoded'}})
+                Authorization: `Basic ${btoa('wunder3-client:wunder3-secret')}`,
+                'Content-Type': 'application/x-www-form-urlencoded'}})
         .then(res => {
-            dispatch({ type: LOG_ON_SUCCESS})
+            dispatch({ type: LOG_ON_SUCCESS, payload: login})
+            console.log(res)
             window.localStorage.setItem('token', res.data.access_token);
-            History.push('/home')  
+            history.push('/home')  
         })
         .catch(err => {
             console.log(err)
@@ -75,28 +94,30 @@ export const LoginForm = (props) => {
         })
     }
 
-
     return (
-
+            <StyledDiv>
                 <form onSubmit={submit}>
                     <h1>
-                        Login<br />
+                        Login
+                        <br />
                     </h1>
 
                     {/* Username */}
                     <label htmlFor='username'>
-                        Username:<br />
+                        <h4>Username:</h4>
                         <input name='username' type='text' onChange={FormState}/><br />
-                        {login.username.length < 2 ? (<p className="error">{errors.username}</p>) : ''}<br />
+                        {login.username.length < 3 ? (<p className="error">{errors.username}</p>) : ''}<br />
                     </label>
 
                     {/* Password */}
                     <label htmlFor='password'>
-                        Password:<br />
+                    <h4>Password:</h4>
                         <input name='password' type='password' onChange={FormState} /><br />
-                        {login.password.length < 2 ? (<p className="error">{errors.password}</p>) : ''}<br />
+                        {login.password.length < 5 ? (<p className="error">{errors.password}</p>) : ''}<br />
                     </label>
                     <button disabled={disabled}>Login</button>
+
                 </form>
+        </StyledDiv>        
     )
 }
