@@ -102,11 +102,11 @@ export const SignUpForm = (props) => {
     return (
         <div>
             <div>
-            {errors.nameFirst}
-            {errors.nameLast}
-            {errors.username}
-            {errors.email}
-            {errors.password}
+            {errors? errors.nameFirst : <></>}
+            {errors? errors.nameLast : <></>}
+            {errors? errors.username : <></>}
+            {errors? errors.email : <></>}
+            {errors? errors.password : <></>}
             </div>
             <form onSubmit={handleSubmit}>
                 <label>
