@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import SignupSchema from './SignupSchema'
 import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup';
@@ -14,13 +14,28 @@ const initialFormValues={
     username: '',
     email: '',
     password: '',
-  }
+}
+const initialErrors={
+    nameFirst:'',
+    nameLast: '',
+    username: '',
+    email: '',
+    password: '',
+}
 
 
 export const SignUpForm = (props) => {
   const reqErr = useSelector(state => state.error)
   const [form, setForm] = useState(initialFormValues)
   const [errors, setErrors] = useState()
+  const [buttonDisabled, setButtonDisabled] = useState(true)
+
+    useEffect(() => {
+        SignupSchema.isValid(form).then(valid => {
+          setButtonDisabled(!valid);
+        });
+      }, [form]);
+
 
   const dispatch = useDispatch() 
   const { push } = useHistory()
@@ -86,6 +101,13 @@ export const SignUpForm = (props) => {
 
     return (
         <div>
+            <div>
+            {errors.nameFirst}
+            {errors.nameLast}
+            {errors.username}
+            {errors.email}
+            {errors.password}
+            </div>
             <form onSubmit={handleSubmit}>
                 <label>
                     First Name
@@ -118,6 +140,7 @@ export const SignUpForm = (props) => {
                     Email
                     <input 
                     name='email'
+                    type='email'
                     value={form.email}
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
@@ -133,7 +156,7 @@ export const SignUpForm = (props) => {
                     </input>
                 </label>
                 <br />
-                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleSubmit} disabled={buttonDisabled}>Submit</button>
             </form>
         </div>
     )
