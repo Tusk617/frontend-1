@@ -8,7 +8,7 @@ import { LOG_ON_START, LOG_ON_SUCCESS, LOG_ON_FAIL } from '../store'
 import axios from 'axios'
 
 const styledDiv = styled.div`
-
+    
 `
 
 const initialValue = {
@@ -81,7 +81,7 @@ export const LoginForm = (props) => {
 
 
     return (
-
+            <styledDiv>
                 <form onSubmit={submit}>
                     <h1>
                         Login<br />
@@ -102,5 +102,6 @@ export const LoginForm = (props) => {
                     </label>
                     <button disabled={disabled}>Login</button>
                 </form>
+        </styledDiv>        
     )
 }

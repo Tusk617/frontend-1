@@ -2,10 +2,14 @@ import React, {useState, useEffect} from 'react'
 import SignupSchema from './SignupSchema'
 import * as Yup from 'yup';
 import axios from 'axios';
-
+import styled from 'styled-components'
 //redux
 import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
+
+const styledDiv = styled.div`
+
+`
 
 const initialFormValues={
     nameFirst:'',
@@ -91,7 +95,7 @@ export const SignUpForm = (props) => {
       }
 
     return (
-        <div>
+        <styledDiv>
             <div>
             {errors.nameFirst}
             {errors.nameLast}
@@ -149,6 +153,6 @@ export const SignUpForm = (props) => {
                 <br />
                 <button onClick={handleSubmit} disabled={buttonDisabled}>Submit</button>
             </form>
-        </div>
+        </styledDiv>
     )
 }
