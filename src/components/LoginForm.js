@@ -18,15 +18,12 @@ const initialValue = {
 } 
 
 export const LoginForm = (props) => {
-
     const dispatch = useDispatch();
-    const History = useHistory();
+    const history = useHistory();
  
     const [ login, setLogin ] = useState(initialValue);
     const [ errors, setErrors ] = useState(initialError);
     const [ disabled, setdisabled ] = useState(false);
-
-   
 
     const FormState = e => {
         const name = e.target.name;
@@ -62,12 +59,13 @@ export const LoginForm = (props) => {
         dispatch({ type: LOG_ON_START})
         axios.post("http://wonderlist-backend.herokuapp.com/login",  `grant_type=password&username=${login.username}&password=${login.password}`, {headers: {
             // btoa is converting our client id/client secret into base64
-            Authorization: `Basic ${btoa('wunder3-client:wunder3-secret')}`,
-            'Content-Type': 'application/x-www-form-urlencoded'}})
+                Authorization: `Basic ${btoa('wunder3-client:wunder3-secret')}`,
+                'Content-Type': 'application/x-www-form-urlencoded'}})
         .then(res => {
-            dispatch({ type: LOG_ON_SUCCESS})
+            dispatch({ type: LOG_ON_SUCCESS, payload: login})
+            console.log(res)
             window.localStorage.setItem('token', res.data.access_token);
-            History.push('/home')  
+            history.push('/home')  
         })
         .catch(err => {
             console.log(err)
@@ -75,28 +73,39 @@ export const LoginForm = (props) => {
         })
     }
 
-
     return (
-
-                <form onSubmit={submit}>
-                    <h1>
-                        Login<br />
-                    </h1>
-
-                    {/* Username */}
-                    <label htmlFor='username'>
-                        Username:<br />
-                        <input name='username' type='text' onChange={FormState}/><br />
-                        {login.username.length < 2 ? (<p className="error">{errors.username}</p>) : ''}<br />
-                    </label>
-
-                    {/* Password */}
-                    <label htmlFor='password'>
-                        Password:<br />
-                        <input name='password' type='password' onChange={FormState} /><br />
-                        {login.password.length < 2 ? (<p className="error">{errors.password}</p>) : ''}<br />
-                    </label>
-                    <button disabled={disabled}>Login</button>
-                </form>
+        <form onSubmit={submit}>
+            <h1>
+                Login
+                <br />
+            </h1>
+            {/* Username */}
+            <label htmlFor='username'>
+                Username:
+                <br />
+                <input 
+                    name='username' 
+                    type='text' 
+                    onChange={FormState}/>
+                <br />
+                {login.username.length < 2 ? 
+                    (<p className="error">{errors.username}</p>) : ''}
+                <br />
+            </label>
+            {/* Password */}
+            <label htmlFor='password'>
+                Password:
+                <br />
+                <input 
+                    name='password' 
+                    type='password' 
+                    onChange={FormState} />
+                <br />
+                {login.password.length < 2 ? 
+                    (<p className="error">{errors.password}</p>) : ''}
+                <br />
+            </label>
+            <button disabled={disabled}>Login</button>
+        </form>
     )
 }

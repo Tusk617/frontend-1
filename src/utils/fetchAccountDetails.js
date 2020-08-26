@@ -1,12 +1,14 @@
 import axiosWithAuth from './axiosWithAuth'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
-function fetchAccountDetails () {
-
+function fetchAccountDetails (user) {
+    console.log(user)
+    const { username } = user
+    
     return axiosWithAuth()
-        .get('/users/:id')
+        .get(`/username/${ username.toLowerCase() }` )
         .then( res => { 
-            console.log(res)
+            return res
         }).catch( err => {
             console.log(err)
         })

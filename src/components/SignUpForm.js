@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import SignupSchema from './SignupSchema'
+import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup';
 import axios from 'axios';
 
@@ -24,10 +25,10 @@ const initialErrors={
 
 
 export const SignUpForm = (props) => {
-    const [form, setForm] = useState(initialFormValues)
-    const [errors, setErrors] = useState(initialErrors)
-    const [users, setUsers] = useState([])
-    const [buttonDisabled, setButtonDisabled] = useState(true)
+  const reqErr = useSelector(state => state.error)
+  const [form, setForm] = useState(initialFormValues)
+  const [errors, setErrors] = useState()
+  const [buttonDisabled, setButtonDisabled] = useState(true)
 
     useEffect(() => {
         SignupSchema.isValid(form).then(valid => {
@@ -35,7 +36,9 @@ export const SignUpForm = (props) => {
         });
       }, [form]);
 
-    const dispatch = useDispatch() 
+
+  const dispatch = useDispatch() 
+  const { push } = useHistory()
     
 
     const handleChange = (e) =>{
@@ -76,17 +79,23 @@ export const SignUpForm = (props) => {
       }
 
       const postNewUser = user => {
-        dispatch({ type: SIGN_UP_START, payload: user})
-        axios.post('https://git.heroku.com/wonderlist-backend.git/users/register', user)
+        dispatch({ type: SIGN_UP_START })
+        axios.post('https://cors-anywhere.herokuapp.com/https://wonderlist-backend.herokuapp.com/register', user)
         .then(res =>{
-          dispatch({ type: SIGN_UP_SUCCESS, payload: res.data})
-          setUsers([res.data, ...users])
-          console.log(res.data);
+          dispatch({ type: SIGN_UP_SUCCESS, payload: user})
+          window.localStorage.setItem('token', res.data.access_token)
+          push('/hompage')
         })
         .catch(err =>{
           debugger
-          console.log(err)
           dispatch({ type: SIGN_UP_FAIL, payload: err })
+          if ( reqErr.includes("status code 500")){
+            setErrors("Sorry, that username has already been taken")
+            setForm({
+              ...form,
+              username: initialFormValues.username
+            })
+          }
         })
       }
 
