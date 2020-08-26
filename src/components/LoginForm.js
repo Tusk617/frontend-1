@@ -23,6 +23,7 @@ const StyledDiv = styled.div`
         background-color: #eaeae6; /*gallery*/
         color: black;
         padding: 1.2% 8%;
+        font-size: 1.3rem;
     }
 
 
