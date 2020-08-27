@@ -24,6 +24,7 @@ const StyledDiv = styled.div`
         background-color: #eaeae6; /*gallery*/
         color: black;
         padding: 1.2% 8%;
+        font-size: 1.3rem;
     }
 `
 
@@ -180,7 +181,7 @@ export const SignUpForm = (props) => {
                 <br />
                 <br/>
                 <br/>
-                <button onClick={handleSubmit} disabled={buttonDisabled}>Submit</button>
+                <button onClick={handleSubmit} disabled={buttonDisabled}>Sign Up</button>
             </form>
         </StyledDiv>
     )
