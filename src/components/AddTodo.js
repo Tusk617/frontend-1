@@ -1,40 +1,11 @@
 import React, {useState} from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth"
-import styled from "styled-components"
+// import { v4 as uuid } from 'uuid'
+
 import { useDispatch } from 'react-redux'
 import { ADD_TODO_FAIL, 
     ADD_TODO_START, 
     ADD_TODO_SUCCESS} from '../store'
-
-const StyledDiv = styled.div`
-  font-family: 'Poppins';
-    h4 {
-        color: #a09f9c; /*mountain mist*/
-    };
-    h4:hover{
-      color: #424242;
-    }
-    p {
-        color: #a09f9c;
-    }
-    p:hover {
-        color:#424242
-    }
-    button:hover {
-        background-color: #0d857b; /*surfie green*/
-        color: white;
-    };
-    button {
-        background-color: #eaeae6; /*gallery*/
-        color: black;
-        padding: 1.2% 8%;
-        margin:4%;
-        font-size: 1.3rem;
-    }
-`
-// import { v4 as uuid } from 'uuid'
-
-
 
 const initialFormValues={
     name: '',
@@ -79,13 +50,11 @@ export const AddTodo = ({listTitle, todoid}) => {
       }
 
     return (
-        <StyledDiv>
         <div>
 
             <form onSubmit={handleSubmit}>
-                <h2>Add a new item</h2>
                 <label>
-                    <h4>Name</h4>
+                    Name:&nbsp;
                     <input
                     name='name'
                     value={form.name}
@@ -93,7 +62,7 @@ export const AddTodo = ({listTitle, todoid}) => {
                     </input>
                 </label>
                 <label>
-                    <h4>Description</h4>
+                    Description:&nbsp; 
                     <textarea
                     name='description'
                     value={form.description}
@@ -101,32 +70,25 @@ export const AddTodo = ({listTitle, todoid}) => {
                     </textarea>  
                 </label>
                 <label>
-                    <h4>Due Date</h4>
-                    <p>Input format YYYY-MM-DD</p>
-                    <input
-                    name='duedate'
-                    value={form.duedate}
+                    Due&nbsp;Date:&nbsp; 
+                    <select
+                    name='date'
+                    value={form.date}
                     onChange={handleChange} >
-                    </input>
+                        <option value = ''>Select an option</option>
+                        <option value="2020-12-31">An option</option>
+                    </select>
                 </label>
                 <label>
-                    <h4>Frequency</h4>
-                    <select
+                    Frequency:&nbsp;
+                    <input
                     name='frequency'
                     value={form.frequency}
                     onChange={handleChange} >
-                        <option value = ''>Select An Option</option>
-                        <option value = 'daily'>Daily</option>
-                        <option value = 'weekly'>Weekly</option>
-                        <option value = 'biweekly'>Biweekly</option>
-                        <option value = 'monthly'>Monthly</option>
-                        <option value = 'yearly'>Yearly</option>
-                    </select>
+                    </input>
                 </label>
-                <br />
                 <button>Submit</button>
             </form>
         </div>
-        </StyledDiv>
     )
 }
