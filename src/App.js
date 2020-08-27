@@ -9,7 +9,8 @@ import { LandingPage,
          NavigationBar,
          HomePage,
          AccountSettings,
-         PrivateRoute
+         PrivateRoute,
+         CreateTodo
          } from './components'
 
 function App() {

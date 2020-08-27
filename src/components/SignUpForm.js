@@ -3,7 +3,7 @@ import SignupSchema from './SignupSchema'
 import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup';
 import axios from 'axios';
-import styled from 'styled-components'
+import styled from 'styled-components';
 //redux
 import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -88,15 +88,15 @@ export const SignUpForm = (props) => {
     const handleSubmit = (e) =>{
         e.preventDefault()
         const newUser ={
-            firstname: form.firstname.trim(),
-            lastname: form.lastname.trim(),
             username: form.username.trim(),
-            email: form.email.trim(),
             password: form.password.trim(),
+            email: form.email.trim(),
+            firstname: form.nameFirst.trim(),
+            lastname: form.nameLast.trim(),
         }
         postNewUser(newUser)
         setForm(initialFormValues)
-      }
+    }
 
       const postNewUser = user => {
         dispatch({ type: SIGN_UP_START })

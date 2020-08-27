@@ -8,4 +8,5 @@ export { TodosContainer } from './TodosContainer'
 export { TodoSearch } from './TodoSearch'
 export { PrivateRoute } from './PrivateRoute'
 export { HomePage } from './HomePage'
-export { AddTodo } from './AddTodo'
+export {AddTodo} from './AddTodo'
+

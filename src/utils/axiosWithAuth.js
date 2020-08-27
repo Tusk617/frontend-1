@@ -5,7 +5,7 @@ const axiosWithAuth = () => {
     return axios.create({
         baseURL: "http://wonderlist-backend.herokuapp.com/",
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
         }
     })
 }
