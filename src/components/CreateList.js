@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CreateTodo = () => {
+export const CreateList = () => {
     return (
         <div>
             
