@@ -38,6 +38,7 @@ export const AccountSettings = () => {
         .put(`/users/${user.userID}`, userToEdit)
         .then(res =>{
             console.log('update change', res)
+            setUserToEdit(res.data)
             setEditing(false)
         })
         .catch(err => {
@@ -49,7 +50,7 @@ export const AccountSettings = () => {
         .delete(`/users/${user.userID}`)
         .then(res=>{ console.log('delete user', res)
             setAllUsers(allUsers.filter((item)=> item.id !== user.id))
-            // console.log('from delete', user)
+            console.log('from delete', user)
             // history.push('/home')
         })
         .catch(err=>{
@@ -82,7 +83,7 @@ export const AccountSettings = () => {
                 <p>Username: {user.username} </p>
                 <p>First Name: {user.firstname}</p>
                 <p>Last Name: {user.lastname}</p>
-                {/* <p>Email: {userToEdit.email}</p> */}
+                <p>Email: {user.email}</p>
                 <p>Password: {user.password}</p>
                 <button onClick={()=> editUser(user)}>Edit Account</button>
                 <button onClick={()=> deleteUser()}>Delete Account</button>
@@ -90,9 +91,9 @@ export const AccountSettings = () => {
             <br/>
             {editing && (
             <form onSubmit={saveEdit}>
-                <input placeholder='username' type="text" name='username'value={userToEdit.username} onChange={handleChange}/>
                 <input placeholder='first'type="text" name='firstname' value={userToEdit.firstname} onChange={handleChange}/>
                 <input placeholder='last' type="text" name='lastname' value={userToEdit.lastname} onChange={handleChange}/>
+                <input placeholder='email' type="text" name='email'value={userToEdit.email} onChange={handleChange}/>
                 <input placeholder='password' type="text" name='password'value={userToEdit.password} onChange={handleChange}/>
                 <button>Update</button>
             </form>
