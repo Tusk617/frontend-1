@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
 
 const StlyedDiv = styled.div`
 font-Family: 'Poppins';
@@ -27,20 +28,32 @@ button:hover {
     };
 
 `
-
-// const initialUser = {
-//     firstname: '',
-//     lastname:'',
-//     email: '',
-//     password: '',
-// }
+const initialUser = {
+    username: '',
+    firstname: '',
+    lastname:'',
+    password: '',
+    email: ''
+}
 export const AccountSettings = () => {
     const user = useSelector((state) => state.user);
-    const [userToEdit, setUserToEdit] = useState(user)
+    const dispatch = useDispatch();
+    const [userToEdit, setUserToEdit] = useState(initialUser)
     const [allUsers, setAllUsers] = useState([])
     const [editing, setEditing] = useState(false)
     const history = useHistory()
     useEffect(() => {
+        dispatch({ type: LOAD_START })
+        //grab individual user with username stored in localstorage
+        axiosWithAuth()
+        .get(`/username/${window.localStorage.getItem("username")}`)
+        .then(res=>{
+            dispatch({ type: LOAD_SUCCESS, payload: res.data})
+            console.log('OUR NOBLE USER', res)
+            setUserToEdit(res.data)
+        })
+        .catch(err => dispatch({ type: LOAD_FAILURE}))
+        //grab all users
         axiosWithAuth()
         .get('/users')
         .then(res=>{
@@ -51,21 +64,36 @@ export const AccountSettings = () => {
             console.log(err)
         })
     }, [])
-    // const dispatch = useDispatch();
-    console.log(userToEdit);
-    console.log(user);
+    // console.log('user to edit' , userToEdit);
+    // console.log(user);
     const editUser = (user) => {
         setEditing(true)
         setUserToEdit(user)
     }
+    // const newThing = {
+    //     username: "Becky",
+    //     firstname: "Bee",
+    //     lastname: "Applie",
+    //     password: "password"
+    // }
     const saveEdit = (e) => {
+        const editing = {
+            username: userToEdit.username,
+            firstname: userToEdit.firstname,
+            lastname: userToEdit.lastname,
+            password: userToEdit.password,
+            email: userToEdit.email
+        }
         e.preventDefault()
+        console.log('look here', editing)
         axiosWithAuth()
-        .put(`/users/${user.userID}`, userToEdit)
+        .put(`/users/${user.userid}`, editing)
         .then(res =>{
             console.log('update change', res)
-            setUserToEdit(res.data)
+            dispatch({type: 'UPDATE_USER', payload: editing})
+            // setUserToEdit(res.data)
             setEditing(false)
+            // history.push('/home')
         })
         .catch(err => {
             console.log('wrong', err)
@@ -73,11 +101,11 @@ export const AccountSettings = () => {
     }
     const deleteUser = (e) => {
         axiosWithAuth()
-        .delete(`/users/${user.userID}`)
+        .delete(`/users/${user.userid}`)
         .then(res=>{ console.log('delete user', res)
             setAllUsers(allUsers.filter((item)=> item.id !== user.id))
             console.log('from delete', user)
-            // history.push('/home')
+            history.push('/login')
         })
         .catch(err=>{
             console.log(err)
