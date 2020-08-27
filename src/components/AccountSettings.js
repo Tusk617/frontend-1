@@ -2,6 +2,32 @@ import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+
+const StlyedDiv = styled.div`
+font-Family: 'Poppins';
+`
+
+const StyledDetails = styled.div`
+border: 2px solid black;
+
+`
+const StyledButton = styled.div`
+display:flex;
+justify-content: space-evenly;
+button{
+    background-color: #eaeae6; /*gallery*/
+    color: black;
+    padding: .2% 1%;
+    font-size: 1rem;
+};
+button:hover {
+        background-color: #0d857b; /*surfie green*/
+        color: white;
+    };
+
+`
+
 // const initialUser = {
 //     firstname: '',
 //     lastname:'',
@@ -77,17 +103,24 @@ export const AccountSettings = () => {
         setUserToEdit ({...userToEdit, [ e.target.name]: e.target.value })
     }
     return (
-        <div>
-            <div>
+        <StlyedDiv>
+            
+                <div>
                 <h2> Account Settings </h2>
+                 <StyledDetails>
                 <p>Username: {user.username} </p>
                 <p>First Name: {user.firstname}</p>
                 <p>Last Name: {user.lastname}</p>
                 <p>Email: {user.email}</p>
-                <p>Password: {user.password}</p>
+                <p>Password: {user.password}</p> 
+                </StyledDetails>
+                <br/>
+                <StyledButton>
                 <button onClick={()=> editUser(user)}>Edit Account</button>
                 <button onClick={()=> deleteUser()}>Delete Account</button>
-            </div>
+                </StyledButton>
+                </div>
+           
             <br/>
             {editing && (
             <form onSubmit={saveEdit}>
@@ -98,6 +131,6 @@ export const AccountSettings = () => {
                 <button>Update</button>
             </form>
             )} 
-        </div>
+        </StlyedDiv>
     );
 };

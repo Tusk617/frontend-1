@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { TodosContainer, AccountSettings, Create} from './'
 import fetchAccountDetails from '../utils/fetchAccountDetails'
-
+import styled from 'styled-components'
 import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
 
-
+const StyledDiv = styled.div`
+    font-family: 'Poppins';
+`
 
 export const HomePage = () => {
     const dispatch = useDispatch()
@@ -24,14 +26,14 @@ export const HomePage = () => {
             .catch( err => {
                 dispatch({ type: LOAD_FAILURE, payload: err})
             })
-    }, [user, dispatch])
+    }, [dispatch])
     
     return (
-        <div>
-            <h2>Homepage</h2>
-                <TodosContainer todos={user.todolists}/>
+        <StyledDiv>
+            <h1>Homepage</h1>
+                <TodosContainer todolists={user.todolists}/>
 
-        </div>
+        </StyledDiv>
     )
 }
  

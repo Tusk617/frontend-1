@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import loginSchema from './LoginSchema';
 import * as yup from 'yup';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux'
 import { LOG_ON_START, LOG_ON_SUCCESS, LOG_ON_FAIL } from '../store'
 import axios from 'axios'

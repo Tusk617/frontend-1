@@ -1,5 +1,10 @@
 import React, {useState} from 'react'
-import axios from 'axios'
+import axiosWithAuth from "../utils/axiosWithAuth"
+import styled from 'styled-components'
+
+const StyledDiv = styled.div`
+
+`
 
 const initialFormValues={
     name: '',
@@ -10,9 +15,7 @@ const initialFormValues={
 export const AddTodo = () => {
     const [form, setForm] = useState(initialFormValues)
     const [toDos, setToDos] = useState([])
-    const config = {
-        headers: { Authorization: `Bearer b37f00fc-8e1f-4028-9acf-9a1f74fd7bf9` }
-    };
+    
     const handleChange = (e) =>{
         setForm({
             ...form,
@@ -24,14 +27,15 @@ export const AddTodo = () => {
         const newTodo ={
             name: form.name.trim(),
             description:form.description.trim(),
-            duedate: form.duedate.trim(),
+            date: form.duedate.trim(),
             frequency:form.frequency.trim(),
         }
         postNewTodo(newTodo)
         setForm(initialFormValues)
     }
     const postNewTodo = Todo =>{
-        axios.post('http://wonderlist-backend.herokuapp.com/items/t/10', Todo, config)
+        axiosWithAuth()
+        .post('http://wonderlist-backend.herokuapp.com/items/t/10', Todo,)
         .then(res =>{
           setToDos([res.data, ...toDos])
           console.log(res.data);
@@ -43,7 +47,7 @@ export const AddTodo = () => {
 
     /* Post needs name, description, duedate, frequency */
     return (
-        <div>
+        <StyledDiv>
 
             <form onSubmit={handleSubmit}>
                 <label>
@@ -74,7 +78,7 @@ export const AddTodo = () => {
                     value={form.duedate}
                     onChange={handleChange} >
                         <option value = ''>Select an option</option>
-                        <option value="1969-12-31 16:00:01">An option</option>
+                        <option value="2020-12-31">An option</option>
                     </select>
                 </label>
                 <label>
@@ -87,6 +91,6 @@ export const AddTodo = () => {
                 </label>
                 <button>Submit</button>
             </form>
-        </div>
+        </StyledDiv>
     )
 }

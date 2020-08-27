@@ -1,5 +1,3 @@
-import {v4 as uuid} from 'uuid'
-
 import {
     SIGN_UP_START,
     SIGN_UP_SUCCESS,
@@ -11,6 +9,12 @@ import {
     LOAD_SUCCESS,
     LOAD_FAILURE,
     SUBMIT_TODO_LIST,
+    CREATE_LIST_START,
+    CREATE_LIST_FAIL,
+    CREATE_LIST_SUCCESS,
+    ADD_TODO_START,
+    ADD_TODO_SUCCESS,
+    ADD_TODO_FAIL
     // LOG_OUT,
     // EDIT_ACCT,
     // DEL_ACCT,
@@ -35,7 +39,7 @@ const initTodoValues = {
     itemID: "",
     name: "",
     description: "",
-    dueDate: "",
+    date: "",
     frequency: "",
     // selected: false,
 
@@ -49,6 +53,7 @@ export const reducer = (state = initialState, { type, payload }) => {
         case SIGN_UP_START: 
         case LOG_ON_START:
         case LOAD_START : 
+        case CREATE_LIST_START:
             return { ...state, loading: true, }
         case SIGN_UP_SUCCESS:
             return {
@@ -65,9 +70,15 @@ export const reducer = (state = initialState, { type, payload }) => {
                 password: payload.password,
                     isLoggedIn: true }, 
             loading: false }
+        case CREATE_LIST_SUCCESS:
+            console.log(state.todolists)
+            return { ...state,
+                user: {
+                    ...state.user,
+                    todolists: [ ...state.user.todolists, payload], }
+                }
         case SIGN_UP_FAIL :
         case LOAD_SUCCESS:
-            console.log(payload)
             return { ...state,
                     user: {
                         ...state.user,

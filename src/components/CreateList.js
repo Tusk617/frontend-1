@@ -1,20 +1,29 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosWithAuth from '../utils/axiosWithAuth'
+import styled from 'styled-components'
+import Modal from './Modal/Modal'
+import { AddTodo } from './AddTodo'
 import { CREATE_LIST_START,CREATE_LIST_SUCCESS, CREATE_LIST_FAIL } from '../store'
+
+const StyledDiv = styled.div`
+    button {
+        padding: .2% 1%;
+        font-size: 1rem;
+    }
+`
+
 const initFormVals = {
     title : "",
 }
+
 const someObj = {}
+
 export const CreateList = () => {
     const dispatch = useDispatch()
     const [formVal, setFormVal] = useState(initFormVals)
     const user = useSelector(state => state.user)
-    //     dispatch({type: "TEST_START"})
-    // axiosWithAuth().get('/items').then(res => {
-    //     dispatch({type: "TEST_SUCCESS"})
-    //     console.log(res)})
-    //     .catch( err => dispatch({type: "TEST_FAIL "}))
+    
     const handleSubmit = e => {
         e.preventDefault()
         dispatch({ type: CREATE_LIST_START })
@@ -22,7 +31,7 @@ export const CreateList = () => {
         axiosWithAuth()
             .post(`todos/u/${user.userID}/t/${formVal.title.split(' ').join('-')}`, someObj)
             .then(res => {
-                dispatch({ type: CREATE_LIST_SUCCESS, payload: {formVal} })
+                dispatch({ type: CREATE_LIST_SUCCESS, payload: formVal })
                 console.log("CREATE LIST RESPONSE: ", res)
                 setFormVal(initFormVals)
             })
@@ -37,18 +46,27 @@ export const CreateList = () => {
             [e.target.name]: e.target.value
         })
     }
+
+
     return (
+        <StyledDiv>
         <form id="create-list" onSubmit={handleSubmit}>
-            <label htmlFor="title">Your Project: 
+            <label htmlFor="title"> <p>Your Project:</p> 
                 <input 
                     name="title"
                     type="text"
                     placeholder="What are you working on?"
                     onChange={handleChanges}
-                    value={formVal}
+                    value={formVal.title}
                 />
             </label>
-            <button type="submit">Submit</button>
+            <br/>
+            <br/>   
+            <Modal>
+                <AddTodo/>
+            </Modal>
+            <button onClick={Modal} type="submit">Submit</button>      
         </form>
-    )
-}
+        </StyledDiv>
+            );
+        }
