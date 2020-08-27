@@ -11,8 +11,8 @@ export const TodosContainer = ({ todolists }) => {
                 todolists ? 
                     todolists.map( todolist => {
                         return (
-                            <div>
-                                <TodoList list={todolist} />
+                            <div >
+                                <TodoList list={todolist}/>
                                 
                             </div>
                         )

@@ -13,21 +13,20 @@ const StyledDiv = styled.div`
 ` 
 
 export const TodoList = ({list}) => {
+    const id = list.todoid
+    console.log(list)
     return (
-        <StyledDiv>
-            <div className="todo-list">
-                <h3>{list.title}</h3>
-                {
-                    list.items.map( todo => {
-                        return ( 
-                            <Todo todo={todo} />
-                        )
-                    })
-                }
-            </div>
-            <div>
-            <AddTodo />
-            </div>
-        </StyledDiv>
+        <div className="todo-list">
+            <h3>{list.title}</h3>
+            <AddTodo listTitle={list.title} todoid={id}/>
+            { list.items?
+                list.items.map( todo => {
+                    return ( 
+                        <Todo todo={todo}  />
+                    )
+                })
+                : <></>
+            }
+        </div>
     )
 }

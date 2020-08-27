@@ -18,4 +18,5 @@ export { LOAD_START,
   SIGN_UP_FAIL,
   LOG_ON_START,
   LOG_ON_SUCCESS,
-  LOG_ON_FAIL } from './AuthActions'
+  LOG_ON_FAIL,
+  UPDATE_USER} from './AuthActions'

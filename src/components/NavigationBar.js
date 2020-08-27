@@ -23,7 +23,6 @@ import { useSelector } from 'react-redux'
 
 
 export const NavigationBar = () => {
-    const loggedIn = useSelector( state => state.user.isLoggedIn )
     return (
         <header>
             <StyledNav>
