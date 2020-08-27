@@ -1,12 +1,10 @@
 import React, {useState} from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth"
 // import { v4 as uuid } from 'uuid'
-
 import { useDispatch } from 'react-redux'
 import { ADD_TODO_FAIL, 
     ADD_TODO_START, 
     ADD_TODO_SUCCESS} from '../store'
-
 const initialFormValues={
     name: '',
     description:'',
@@ -16,7 +14,6 @@ const initialFormValues={
 export const AddTodo = ({listTitle, todoid}) => {
     const [form, setForm] = useState(initialFormValues)
     const dispatch = useDispatch()
-    
     const handleChange = (e) =>{
         setForm({
             ...form,
@@ -30,7 +27,6 @@ export const AddTodo = ({listTitle, todoid}) => {
             description:form.description.trim(),
             date: form.date.trim(),
             frequency:form.frequency.trim(),
-    
         }
         postNewTodo(newTodo)
         setForm(initialFormValues)
@@ -48,10 +44,8 @@ export const AddTodo = ({listTitle, todoid}) => {
           console.log(err)
         })
       }
-
     return (
         <div>
-
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:&nbsp;

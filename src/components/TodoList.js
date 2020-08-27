@@ -11,7 +11,7 @@ export const TodoList = ({list}) => {
             { list.items?
                 list.items.map( todo => {
                     return ( 
-                        <Todo todo={todo}  />
+                        <Todo todo={todo} key={todo.itemid} />
                     )
                 })
                 : <></>
