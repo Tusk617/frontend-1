@@ -10,11 +10,7 @@ export const CreateList = () => {
     const dispatch = useDispatch()
     const [formVal, setFormVal] = useState(initFormVals)
     const user = useSelector(state => state.user)
-    //     dispatch({type: "TEST_START"})
-    // axiosWithAuth().get('/items').then(res => {
-    //     dispatch({type: "TEST_SUCCESS"})
-    //     console.log(res)})
-    //     .catch( err => dispatch({type: "TEST_FAIL "}))
+    
     const handleSubmit = e => {
         e.preventDefault()
         dispatch({ type: CREATE_LIST_START })
@@ -22,7 +18,7 @@ export const CreateList = () => {
         axiosWithAuth()
             .post(`todos/u/${user.userID}/t/${formVal.title.split(' ').join('-')}`, someObj)
             .then(res => {
-                dispatch({ type: CREATE_LIST_SUCCESS, payload: {formVal} })
+                dispatch({ type: CREATE_LIST_SUCCESS, payload: formVal })
                 console.log("CREATE LIST RESPONSE: ", res)
                 setFormVal(initFormVals)
             })
@@ -46,7 +42,7 @@ export const CreateList = () => {
                     type="text"
                     placeholder="What are you working on?"
                     onChange={handleChanges}
-                    value={formVal}
+                    value={formVal.title}
                 />
             </label>
             <button type="submit">Submit</button>
