@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from 'react-router-dom'
 import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
+
 const initialUser = {
     username: '',
     firstname: '',
     lastname:'',
-    password: '',
     email: ''
 }
 export const AccountSettings = () => {
@@ -17,6 +17,7 @@ export const AccountSettings = () => {
     const [allUsers, setAllUsers] = useState([])
     const [editing, setEditing] = useState(false)
     const history = useHistory()
+
     useEffect(() => {
         dispatch({ type: LOAD_START })
         //grab individual user with username stored in localstorage
@@ -39,24 +40,17 @@ export const AccountSettings = () => {
             console.log(err)
         })
     }, [])
-    // console.log('user to edit' , userToEdit);
-    // console.log(user);
+
     const editUser = (user) => {
         setEditing(true)
         setUserToEdit(user)
     }
-    // const newThing = {
-    //     username: "Becky",
-    //     firstname: "Bee",
-    //     lastname: "Applie",
-    //     password: "password"
-    // }
+
     const saveEdit = (e) => {
         const editing = {
             username: userToEdit.username,
             firstname: userToEdit.firstname,
             lastname: userToEdit.lastname,
-            password: userToEdit.password,
             email: userToEdit.email
         }
         e.preventDefault()
@@ -86,22 +80,7 @@ export const AccountSettings = () => {
             console.log(err)
         })
     }
-    // const populateForm = (e) => {
-    //         axiosWithAuth()
-    //         .get(`/users/${user.userID}`)
-    //         .then(res=>{
-    //             console.log('populate form on edit click', res)
-    //             setUserToEdit({
-    //                 firstname: res.data.firstname,
-    //                 lastname: res.data.lastname,
-    //                 email: res.data.email,
-    //                 password: res.data.password
-    //             })
-    //         })
-    //         .catch(err=>{
-    //             console.log(err)
-    //         })
-    // }
+ 
     const handleChange = (e) =>{
         setUserToEdit ({...userToEdit, [ e.target.name]: e.target.value })
     }
@@ -113,17 +92,16 @@ export const AccountSettings = () => {
                 <p>First Name: {user.firstname}</p>
                 <p>Last Name: {user.lastname}</p>
                 <p>Email: {user.email}</p>
-                <p>Password: {user.password}</p>
                 <button onClick={()=> editUser(user)}>Edit Account</button>
                 <button onClick={()=> deleteUser()}>Delete Account</button>
             </div>
             <br/>
             {editing && (
             <form onSubmit={saveEdit}>
+                <input placeholder='username'type="text" name='username' value={userToEdit.username} onChange={handleChange}/>
                 <input placeholder='first'type="text" name='firstname' value={userToEdit.firstname} onChange={handleChange}/>
                 <input placeholder='last' type="text" name='lastname' value={userToEdit.lastname} onChange={handleChange}/>
                 <input placeholder='email' type="text" name='email'value={userToEdit.email} onChange={handleChange}/>
-                <input placeholder='password' type="text" name='password'value={userToEdit.password} onChange={handleChange}/>
                 <button>Update</button>
             </form>
             )} 
