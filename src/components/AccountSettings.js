@@ -1,7 +1,8 @@
-mport React, { useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from 'react-router-dom'
+import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
 const initialUser = {
     username: '',
     firstname: '',
@@ -11,11 +12,23 @@ const initialUser = {
 }
 export const AccountSettings = () => {
     const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
     const [userToEdit, setUserToEdit] = useState(initialUser)
     const [allUsers, setAllUsers] = useState([])
     const [editing, setEditing] = useState(false)
     const history = useHistory()
     useEffect(() => {
+        dispatch({ type: LOAD_START })
+        //grab individual user with username stored in localstorage
+        axiosWithAuth()
+        .get(`/username/${window.localStorage.getItem("username")}`)
+        .then(res=>{
+            dispatch({ type: LOAD_SUCCESS, payload: res.data})
+            console.log('OUR NOBLE USER', res)
+            setUserToEdit(res.data)
+        })
+        .catch(err => dispatch({ type: LOAD_FAILURE}))
+        //grab all users
         axiosWithAuth()
         .get('/users')
         .then(res=>{
@@ -26,8 +39,7 @@ export const AccountSettings = () => {
             console.log(err)
         })
     }, [])
-    const dispatch = useDispatch();
-    console.log('user to edit' , userToEdit);
+    // console.log('user to edit' , userToEdit);
     // console.log(user);
     const editUser = (user) => {
         setEditing(true)
@@ -50,7 +62,7 @@ export const AccountSettings = () => {
         e.preventDefault()
         console.log('look here', editing)
         axiosWithAuth()
-        .put(`/users/${user.userID}`, editing)
+        .put(`/users/${user.userid}`, editing)
         .then(res =>{
             console.log('update change', res)
             dispatch({type: 'UPDATE_USER', payload: editing})
@@ -64,7 +76,7 @@ export const AccountSettings = () => {
     }
     const deleteUser = (e) => {
         axiosWithAuth()
-        .delete(`/users/${user.userID}`)
+        .delete(`/users/${user.userid}`)
         .then(res=>{ console.log('delete user', res)
             setAllUsers(allUsers.filter((item)=> item.id !== user.id))
             console.log('from delete', user)

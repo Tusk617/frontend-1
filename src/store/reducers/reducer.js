@@ -13,7 +13,8 @@ import {
     CREATE_LIST_SUCCESS,
     ADD_TODO_START,
     ADD_TODO_SUCCESS,
-    ADD_TODO_FAIL
+    ADD_TODO_FAIL,
+    UPDATE_USER
     // LOG_OUT,
     // EDIT_ACCT,
     // DEL_ACCT,
@@ -95,17 +96,24 @@ export const reducer = (state = initialState, { type, payload }) => {
                 }
             }
         case LOAD_SUCCESS:
+            console.log("LOADING PAYLOAD: ", payload)
             return { ...state,
                 user: {
-                    ...state.user,
-                    todolists: payload.todolists,
-                    userID: payload.userid,
-                    firstname: payload.firstname,
-                    lastname: payload.lastname,
+                    ...payload
                 },
                 error: initialState.error,
                 loading: false 
             }
+        case UPDATE_USER:
+            console.log("UPDATE USER REDUCER", payload);
+			return {
+				...state,
+				user: {
+                    ...state.user,
+                    ...payload
+				},
+			};
+
         case LOG_ON_FAIL:
         case SIGN_UP_FAIL :
         case LOAD_FAILURE:

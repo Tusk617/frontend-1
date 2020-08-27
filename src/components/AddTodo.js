@@ -49,7 +49,6 @@ export const AddTodo = ({listTitle, todoid}) => {
         })
       }
 
-    /* Post needs name, description, duedate, frequency */
     return (
         <div>
 
@@ -72,11 +71,6 @@ export const AddTodo = ({listTitle, todoid}) => {
                 </label>
                 <label>
                     Due&nbsp;Date:&nbsp; 
-                    {/* <input
-                    name='duedate'
-                    value={form.duedate}
-                    onChange={handleChange} >
-                    </input> */}
                     <select
                     name='date'
                     value={form.date}

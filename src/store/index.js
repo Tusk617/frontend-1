@@ -19,5 +19,6 @@ export { LOAD_START,
    CREATE_LIST_FAIL,
    ADD_TODO_FAIL, 
    ADD_TODO_START, 
-   ADD_TODO_SUCCESS
+   ADD_TODO_SUCCESS,
+   UPDATE_USER
 } from './actions'
