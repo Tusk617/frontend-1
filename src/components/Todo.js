@@ -1,11 +1,13 @@
 import React from 'react'
-import axios from 'axios';
 
 export const Todo = ({todo}) => {
     console.log(todo)
     return (
         <div>
-            <p>todo</p>
+            <h4>{todo.name}</h4>
+            <p>Details: {todo.description}</p>
+            <p>Due: {todo.duedate}</p>
+            <p>Repeats: {todo.frequency}</p>
         </div>
     )
 }

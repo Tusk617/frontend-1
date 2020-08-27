@@ -17,7 +17,6 @@ export const TodoList = ({list}) => {
         <StyledDiv>
             <div className="todo-list">
                 <h3>{list.title}</h3>
-                <AddTodo />
                 {
                     list.items.map( todo => {
                         return ( 
@@ -25,6 +24,9 @@ export const TodoList = ({list}) => {
                         )
                     })
                 }
+            </div>
+            <div>
+            <AddTodo />
             </div>
         </StyledDiv>
     )

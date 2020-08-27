@@ -59,7 +59,7 @@ export const AddTodo = () => {
     }
     const postNewTodo = Todo =>{
         axiosWithAuth()
-        .post('http://wonderlist-backend.herokuapp.com/items/t/10', Todo,)
+        .post(`'http://wonderlist-backend.herokuapp.com/items/t/:todoid'`, Todo,)
         .then(res =>{
           setToDos([res.data, ...toDos])
           console.log(res.data);
