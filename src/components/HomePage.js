@@ -24,12 +24,12 @@ export const HomePage = () => {
             .catch( err => {
                 dispatch({ type: LOAD_FAILURE, payload: err})
             })
-    }, [user, dispatch])
+    }, [dispatch])
     
     return (
         <div>
             <h2>Homepage</h2>
-                <TodosContainer todos={user.todolists}/>
+                <TodosContainer todolists={user.todolists}/>
 
         </div>
     )

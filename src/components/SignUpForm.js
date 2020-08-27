@@ -91,8 +91,8 @@ export const SignUpForm = (props) => {
             username: form.username.trim(),
             password: form.password.trim(),
             email: form.email.trim(),
-            firstname: form.nameFirst.trim(),
-            lastname: form.nameLast.trim(),
+            firstname: form.firstname.trim(),
+            lastname: form.lastname.trim(),
         }
         postNewUser(newUser)
         setForm(initialFormValues)
