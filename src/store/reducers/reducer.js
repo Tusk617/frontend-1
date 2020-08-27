@@ -8,13 +8,13 @@ import {
     LOAD_START,
     LOAD_SUCCESS,
     LOAD_FAILURE,
-    SUBMIT_TODO_LIST,
     CREATE_LIST_START,
     CREATE_LIST_FAIL,
     CREATE_LIST_SUCCESS,
     ADD_TODO_START,
     ADD_TODO_SUCCESS,
-    ADD_TODO_FAIL
+    ADD_TODO_FAIL,
+    UPDATE_USER
     // LOG_OUT,
     // EDIT_ACCT,
     // DEL_ACCT,
@@ -54,6 +54,7 @@ export const reducer = (state = initialState, { type, payload }) => {
         case LOG_ON_START:
         case LOAD_START : 
         case CREATE_LIST_START:
+        case ADD_TODO_START:
             return { ...state, loading: true, }
         case SIGN_UP_SUCCESS:
             return {
@@ -77,25 +78,48 @@ export const reducer = (state = initialState, { type, payload }) => {
                     ...state.user,
                     todolists: [ ...state.user.todolists, payload], }
                 }
-        case SIGN_UP_FAIL :
-        case LOAD_SUCCESS:
-            return { ...state,
-                    user: {
-                        ...state.user,
-                        todolists: payload.todolists,
-                        userID: payload.userid,
-                        firstname: payload.firstname,
-                        lastname: payload.lastname,
-                    },
-                    error: initialState.error,
-                    loading: false 
+        case ADD_TODO_SUCCESS:
+            console.log(payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    todolists: state.user.todolists.map( list => {
+                        if (list.title === payload.list){
+                            return {
+                                ...list, items: [ ...list.items, payload.todoVals]
+                            }
+                        } else {
+                            return list
+                        }
+                    })
                 }
-                        case LOG_ON_FAIL:
+            }
+        case LOAD_SUCCESS:
+            console.log("LOADING PAYLOAD: ", payload)
+            return { ...state,
+                user: {
+                    ...payload
+                },
+                error: initialState.error,
+                loading: false 
+            }
+        case UPDATE_USER:
+            console.log("UPDATE USER REDUCER", payload);
+			return {
+				...state,
+				user: {
+                    ...state.user,
+                    ...payload
+				},
+			};
+
+        case LOG_ON_FAIL:
+        case SIGN_UP_FAIL :
         case LOAD_FAILURE:
-            return { ...state, error : payload, loading: false }
-        case SUBMIT_TODO_LIST:
-            return { ...state, 
-                todolists: [...state.todolists, payload] };
+        case CREATE_LIST_FAIL:
+        case ADD_TODO_FAIL:
+            return { ...state, error : payload, loading: false };
         default:
             return state
         }
