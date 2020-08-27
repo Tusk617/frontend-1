@@ -1,18 +1,26 @@
 import React, {useState} from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth"
-import styled from "styled-components"
 import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
 import { ADD_TODO_FAIL, 
     ADD_TODO_START, 
     ADD_TODO_SUCCESS} from '../store'
 
-const StyledDiv = styled.div`
-  font-family: 'Poppins';
-
-`
 // import { v4 as uuid } from 'uuid'
 
-
+const StyledDiv = styled.div`
+color: white;
+position: fixed;
+z-index: 500;
+background-color: #0d857b;
+width: 70%;
+border: 3px solid black;
+padding: 16px;
+left: 15%;
+top: 40%;
+box-sizing: border-box;
+transition: all 0.3s ease-out;
+`
 
 const initialFormValues={
     name: '',

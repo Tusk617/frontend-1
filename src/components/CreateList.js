@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosWithAuth from '../utils/axiosWithAuth'
 import styled from 'styled-components'
-import Modal from './Modal/Modal'
-import { AddTodo } from './AddTodo'
 import { CREATE_LIST_START,CREATE_LIST_SUCCESS, CREATE_LIST_FAIL } from '../store'
 
 const StyledDiv = styled.div`
@@ -29,7 +27,7 @@ export const CreateList = () => {
         dispatch({ type: CREATE_LIST_START })
         console.log(formVal)
         axiosWithAuth()
-            .post(`todos/u/${user.userID}/t/${formVal.title.split(' ').join('-')}`, someObj)
+            .post(`todos/u/${user.userid}/t/${formVal.title.split(' ').join('-')}`, someObj)
             .then(res => {
                 formVal.title.split('-').join(' ')
                 dispatch({ type: CREATE_LIST_SUCCESS, payload: formVal })
@@ -62,11 +60,8 @@ export const CreateList = () => {
                 />
             </label>
             <br/>
-            <br/>   
-            <Modal>
-                <AddTodo/>
-            </Modal>
-            <button onClick={Modal} type="submit">Submit</button>      
+            <br/> 
+            <button type="submit">Submit</button>      
         </form>
         </StyledDiv>
             );
