@@ -4,8 +4,9 @@ export const Todo = ({todo}) => {
     return (
         <div>
             <h4>{todo.name}</h4>
-            <p>{todo.description}</p>
-            <p></p> 
+            <p>Details: {todo.description}</p>
+            <p>Due: {todo.duedate}</p>
+            <p>Repeats: {todo.frequency}</p>
         </div>
     )
 }
