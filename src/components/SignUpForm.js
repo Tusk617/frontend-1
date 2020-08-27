@@ -3,7 +3,7 @@ import SignupSchema from './SignupSchema'
 import { useHistory } from 'react-router-dom'
 import * as Yup from 'yup';
 import axios from 'axios';
-import styled from 'styled-components'
+import styled from 'styled-components';
 //redux
 import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
 import { useDispatch, useSelector } from 'react-redux'

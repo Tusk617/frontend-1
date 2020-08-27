@@ -11,12 +11,13 @@ export const TodosContainer = ({ todos }) => {
                         return (
                             <div>
                                 <Todo todo={todo} />
-                                <AddTodo></AddTodo>
+                                
                             </div>
                         )
                     })
                     : <></>
             }
+            <AddTodo></AddTodo>
         </section>
     )
 }

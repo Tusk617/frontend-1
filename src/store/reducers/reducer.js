@@ -73,8 +73,8 @@ export const reducer = (state = initialState, { type, payload }) => {
                         ...state.user,
                         todolists: payload.todolists,
                         userID: payload.userid,
-                        firstName: payload.firstname,
-                        lastName: payload.lastname,
+                        firstname: payload.firstname,
+                        lastname: payload.lastname,
                     },
                     error: initialState.error,
                     loading: false 

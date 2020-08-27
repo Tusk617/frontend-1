@@ -1,93 +1,54 @@
-import React, {useState} from 'react'
-import axios from 'axios'
-import { date } from 'yup'
-
-const initialFormValues={
-    name: '',
-    description:'',
-    date: '',
-    frequency:'',
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import axiosWithAuth from '../utils/axiosWithAuth'
+import { CREATE_LIST_START,CREATE_LIST_SUCCESS, CREATE_LIST_FAIL } from '../store'
+const initFormVals = {
+    title : "",
 }
-export const CreateTodo = () => {
-    const [form, setForm] = useState(initialFormValues)
-    const [toDos, setToDos] = useState([])
-    const config = {
-        headers: { Authorization: `Bearer 0bfa35a7-810b-4906-a078-49a63edd746e` }
-    };
-    const handleChange = (e) =>{
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-          });
-    }
-    const handleSubmit = (e) =>{
+const someObj = {}
+export const CreateList = () => {
+    const dispatch = useDispatch()
+    const [formVal, setFormVal] = useState(initFormVals)
+    const user = useSelector(state => state.user)
+    //     dispatch({type: "TEST_START"})
+    // axiosWithAuth().get('/items').then(res => {
+    //     dispatch({type: "TEST_SUCCESS"})
+    //     console.log(res)})
+    //     .catch( err => dispatch({type: "TEST_FAIL "}))
+    const handleSubmit = e => {
         e.preventDefault()
-        const newTodo ={
-            name: form.name.trim(),
-            description:form.description.trim(),
-            date: form.date.trim(),
-            frequency:form.frequency.trim()
-        }
-        postNewTodo(newTodo)
-        setForm(initialFormValues)
+        dispatch({ type: CREATE_LIST_START })
+        console.log(formVal)
+        axiosWithAuth()
+            .post(`todos/u/${user.userID}/t/${formVal.title.split(' ').join('-')}`, someObj)
+            .then(res => {
+                dispatch({ type: CREATE_LIST_SUCCESS, payload: {formVal} })
+                console.log("CREATE LIST RESPONSE: ", res)
+                setFormVal(initFormVals)
+            })
+            .catch(err => {
+                dispatch({ type: CREATE_LIST_FAIL})
+                setFormVal(initFormVals)
+                console.log(err)})
     }
-    const postNewTodo = Todo =>{
-        axios.post('http://wonderlist-backend.herokuapp.com/items/t/10', Todo, config)
-        .then(res =>{
-          setToDos([res.data, ...toDos])
-          console.log(res.data);
+    const handleChanges = e => {
+        e.persist()
+        setFormVal({
+            [e.target.name]: e.target.value
         })
-        .catch(err =>{
-          debugger
-        })
-      }
-
-    /* Post needs name, description, duedate, frequency */
+    }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name
-                    <input
-                    name='name'
-                    value={form.name}
-                    onChange={handleChange} >
-                    </input>
-                </label>
-                <label>
-                    Description
-                    <textarea
-                    name='description'
-                    value={form.description}
-                    onChange={handleChange} >
-                    </textarea>  
-                </label>
-                <label>
-                    Due Date
-                    {/* <input
-                    name='duedate'
-                    value={form.duedate}
-                    onChange={handleChange} >
-                    </input> */}
-                    <select
-                    name='date'
-                    value={form.date}
-                    onChange={handleChange}
-                    >
-                        <option value = ''>Select an option</option>
-                        <option value='2020-12-31'>An option</option>
-                    </select>
-                </label>
-                <label>
-                    Frequency
-                    <input
-                    name='frequency'
-                    value={form.frequency}
-                    onChange={handleChange} >
-                    </input>
-                </label>
-                <button>Submit</button>
-            </form>
-        </div>
+        <form id="create-list" onSubmit={handleSubmit}>
+            <label htmlFor="title">Your Project: 
+                <input 
+                    name="title"
+                    type="text"
+                    placeholder="What are you working on?"
+                    onChange={handleChanges}
+                    value={formVal}
+                />
+            </label>
+            <button type="submit">Submit</button>
+        </form>
     )
 }
