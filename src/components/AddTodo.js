@@ -9,17 +9,20 @@ import { ADD_TODO_FAIL,
 // import { v4 as uuid } from 'uuid'
 
 const StyledDiv = styled.div`
-color: white;
-position: fixed;
-z-index: 500;
-background-color: #0d857b;
-width: 70%;
-border: 3px solid black;
-padding: 16px;
-left: 15%;
-top: 40%;
-box-sizing: border-box;
-transition: all 0.3s ease-out;
+    font-family: 'Poppins';
+    color: white;
+    position: fixed;
+    background-color: #0d857b;
+    width: 70%;
+    border: 3px solid black;
+    padding: 16px;
+    left: 15%;
+    top: 40%;
+
+    button {
+            padding: .2% 1%;
+            font-size: 1rem;
+        }
 `
 
 const initialFormValues={
@@ -107,6 +110,7 @@ export const AddTodo = ({listTitle, todoid}) => {
                         <option value = 'yearly'>Yearly</option>
                     </select>
                 </label>
+                <br />
                 <br />
                 <button>Submit</button>
             </form>

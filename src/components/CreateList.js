@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { CREATE_LIST_START,CREATE_LIST_SUCCESS, CREATE_LIST_FAIL } from '../store'
 
 const StyledDiv = styled.div`
+   font-family: 'Poppins';
     button {
         padding: .2% 1%;
         font-size: 1rem;
