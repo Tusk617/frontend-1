@@ -10,7 +10,8 @@ import { LandingPage,
          HomePage,
          AccountSettings,
          PrivateRoute,
-         CreateTodo
+         CreateTodo,
+         TodosContainer
          } from './components'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <Route path="/signup" component={SignUpForm} />
       <PrivateRoute path="/home" component={HomePage} />
       <PrivateRoute path="/account" component={AccountSettings} />
+      <PrivateRoute path="/agenda" component ={TodosContainer} />
     </div>
   );
 }

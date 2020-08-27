@@ -27,19 +27,19 @@ export const NavigationBar = () => {
     return (
         <header>
             <StyledNav>
-                { !loggedIn ?
+                { !window.localStorage.getItem("token") ?
                     <NavLink to="/login"> Login </NavLink>
                     : <></>
                 }
-                { !loggedIn ?
+                { !window.localStorage.getItem("token") ?
                     <NavLink to="/signup" >Sign Up</NavLink>
                     : <></>
                 }
-                { loggedIn ?
+                { window.localStorage.getItem("token") ?
                     <NavLink to="/account" >Account </NavLink>
                     : <></>
                 }
-                { loggedIn ?
+                { window.localStorage.getItem("token") ?
                     <NavLink to="/agenda" > To Do </NavLink>
                     : <></>
                 }
