@@ -1,16 +1,17 @@
-import React, { useState,useEffect } from "react";
+mport React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from 'react-router-dom'
-// const initialUser = {
-//     firstname: '',
-//     lastname:'',
-//     email: '',
-//     password: '',
-// }
+const initialUser = {
+    username: '',
+    firstname: '',
+    lastname:'',
+    password: '',
+    email: ''
+}
 export const AccountSettings = () => {
     const user = useSelector((state) => state.user);
-    const [userToEdit, setUserToEdit] = useState(user)
+    const [userToEdit, setUserToEdit] = useState(initialUser)
     const [allUsers, setAllUsers] = useState([])
     const [editing, setEditing] = useState(false)
     const history = useHistory()
@@ -25,21 +26,37 @@ export const AccountSettings = () => {
             console.log(err)
         })
     }, [])
-    // const dispatch = useDispatch();
-    console.log(userToEdit);
-    console.log(user);
+    const dispatch = useDispatch();
+    console.log('user to edit' , userToEdit);
+    // console.log(user);
     const editUser = (user) => {
         setEditing(true)
         setUserToEdit(user)
     }
+    // const newThing = {
+    //     username: "Becky",
+    //     firstname: "Bee",
+    //     lastname: "Applie",
+    //     password: "password"
+    // }
     const saveEdit = (e) => {
+        const editing = {
+            username: userToEdit.username,
+            firstname: userToEdit.firstname,
+            lastname: userToEdit.lastname,
+            password: userToEdit.password,
+            email: userToEdit.email
+        }
         e.preventDefault()
+        console.log('look here', editing)
         axiosWithAuth()
-        .put(`/users/${user.userID}`, userToEdit)
+        .put(`/users/${user.userID}`, editing)
         .then(res =>{
             console.log('update change', res)
-            setUserToEdit(res.data)
+            dispatch({type: 'UPDATE_USER', payload: editing})
+            // setUserToEdit(res.data)
             setEditing(false)
+            // history.push('/home')
         })
         .catch(err => {
             console.log('wrong', err)
@@ -51,7 +68,7 @@ export const AccountSettings = () => {
         .then(res=>{ console.log('delete user', res)
             setAllUsers(allUsers.filter((item)=> item.id !== user.id))
             console.log('from delete', user)
-            // history.push('/home')
+            history.push('/login')
         })
         .catch(err=>{
             console.log(err)
