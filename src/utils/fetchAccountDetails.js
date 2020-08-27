@@ -2,8 +2,8 @@ import axiosWithAuth from './axiosWithAuth'
 // import { useParams } from 'react-router-dom'
 
 function fetchAccountDetails (user) {
-    console.log(user)
-    const { username } = user
+    // const { username } = user
+    const username = window.localStorage.getItem('username')
     
     return axiosWithAuth()
         .get(`/username/${ username.toLowerCase() }` )

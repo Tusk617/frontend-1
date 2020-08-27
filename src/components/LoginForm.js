@@ -23,6 +23,7 @@ const StyledDiv = styled.div`
         background-color: #eaeae6; /*gallery*/
         color: black;
         padding: 1.2% 8%;
+        font-size: 1.3rem;
     }
 
 
@@ -86,6 +87,7 @@ export const LoginForm = (props) => {
             dispatch({ type: LOG_ON_SUCCESS, payload: login})
             console.log(res)
             window.localStorage.setItem('token', res.data.access_token);
+            window.localStorage.setItem('username', login.username);
             history.push('/home')  
         })
         .catch(err => {

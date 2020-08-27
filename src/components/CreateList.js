@@ -37,6 +37,7 @@ export const CreateList = () => {
             [e.target.name]: e.target.value
         })
     }
+
     return (
         <form id="create-list" onSubmit={handleSubmit}>
             <label htmlFor="title">Your Project: 
