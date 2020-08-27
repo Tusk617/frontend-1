@@ -9,15 +9,15 @@ import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
 
 const initialFormValues={
-    nameFirst:'',
-    nameLast: '',
+    firstname:'',
+    lastname: '',
     username: '',
     email: '',
     password: '',
 }
 const initialErrors={
-    nameFirst:'',
-    nameLast: '',
+    firstname:'',
+    lastname: '',
     username: '',
     email: '',
     password: '',
@@ -68,8 +68,8 @@ export const SignUpForm = (props) => {
     const handleSubmit = (e) =>{
         e.preventDefault()
         const newUser ={
-            nameFirst: form.nameFirst.trim(),
-            nameLast: form.nameLast.trim(),
+            firstname: form.firstname.trim(),
+            lastname: form.lastname.trim(),
             username: form.username.trim(),
             email: form.email.trim(),
             password: form.password.trim(),
@@ -84,7 +84,8 @@ export const SignUpForm = (props) => {
         .then(res =>{
           dispatch({ type: SIGN_UP_SUCCESS, payload: user})
           window.localStorage.setItem('token', res.data.access_token)
-          push('/hompage')
+          window.localStorage.setItem('username', form.username);
+          push('/home')
         })
         .catch(err =>{
           debugger
@@ -102,8 +103,8 @@ export const SignUpForm = (props) => {
     return (
         <div>
             <div>
-            {errors? errors.nameFirst : <></>}
-            {errors? errors.nameLast : <></>}
+            {errors? errors.firstname : <></>}
+            {errors? errors.lastname : <></>}
             {errors? errors.username : <></>}
             {errors? errors.email : <></>}
             {errors? errors.password : <></>}
@@ -112,8 +113,8 @@ export const SignUpForm = (props) => {
                 <label>
                     First Name
                     <input
-                    name='nameFirst'
-                    value={form.nameFirst}
+                    name='firstname'
+                    value={form.firstname}
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
                 </label>
@@ -121,8 +122,8 @@ export const SignUpForm = (props) => {
                 <label>
                     Last Name
                     <input 
-                    name='nameLast'
-                    value={form.nameLast}
+                    name='lastname'
+                    value={form.lastname}
                     onChange={(e) =>{handleChange(e)}}>
                     </input>
                 </label>

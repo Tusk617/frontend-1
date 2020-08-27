@@ -12,16 +12,19 @@ export const HomePage = () => {
     const user = useSelector( state => state.user)
     const isLoggedIn = useSelector( state => state.user)
 
-    useEffect( () => {
+    console.log(user)
+
+    useEffect(() => {
         dispatch({ type: LOAD_START })
             fetchAccountDetails(user)
             .then( res => {
+                // debugger
                 dispatch({ type: LOAD_SUCCESS, payload: res.data })
             })
             .catch( err => {
                 dispatch({ type: LOAD_FAILURE, payload: err})
             })
-    }, [])
+    }, [user, dispatch])
     
     return (
         <div>
