@@ -1,15 +1,21 @@
 import React, {useState} from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth"
+// import { v4 as uuid } from 'uuid'
+
+import { useDispatch } from 'react-redux'
+import { ADD_TODO_FAIL, 
+    ADD_TODO_START, 
+    ADD_TODO_SUCCESS} from '../store'
 
 const initialFormValues={
     name: '',
     description:'',
-    duedate: '',
+    date: '',
     frequency:'',
 }
-export const AddTodo = () => {
+export const AddTodo = ({listTitle, todoid}) => {
     const [form, setForm] = useState(initialFormValues)
-    const [toDos, setToDos] = useState([])
+    const dispatch = useDispatch()
     
     const handleChange = (e) =>{
         setForm({
@@ -22,21 +28,24 @@ export const AddTodo = () => {
         const newTodo ={
             name: form.name.trim(),
             description:form.description.trim(),
-            date: form.duedate.trim(),
+            date: form.date.trim(),
             frequency:form.frequency.trim(),
+    
         }
         postNewTodo(newTodo)
         setForm(initialFormValues)
     }
-    const postNewTodo = Todo =>{
+    const postNewTodo = todo =>{
+        console.log("TODO PAYLOAD: ", todo)
+        dispatch({ type: ADD_TODO_START })
         axiosWithAuth()
-        .post('http://wonderlist-backend.herokuapp.com/items/t/10', Todo,)
+        .post(`http://wonderlist-backend.herokuapp.com/items/t/${todoid}`, todo)
         .then(res =>{
-          setToDos([res.data, ...toDos])
-          console.log(res.data);
+          dispatch({ type: ADD_TODO_SUCCESS, payload: {todoVals: todo, list: listTitle}})
+          console.log("POST NEW TODO RESPONSE: ", res.data);
         })
         .catch(err =>{
-          debugger
+          console.log(err)
         })
       }
 
@@ -46,7 +55,7 @@ export const AddTodo = () => {
 
             <form onSubmit={handleSubmit}>
                 <label>
-                    Name
+                    Name:&nbsp;
                     <input
                     name='name'
                     value={form.name}
@@ -54,7 +63,7 @@ export const AddTodo = () => {
                     </input>
                 </label>
                 <label>
-                    Description
+                    Description:&nbsp; 
                     <textarea
                     name='description'
                     value={form.description}
@@ -62,22 +71,22 @@ export const AddTodo = () => {
                     </textarea>  
                 </label>
                 <label>
-                    Due Date
+                    Due&nbsp;Date:&nbsp; 
                     {/* <input
                     name='duedate'
                     value={form.duedate}
                     onChange={handleChange} >
                     </input> */}
                     <select
-                    name='duedate'
-                    value={form.duedate}
+                    name='date'
+                    value={form.date}
                     onChange={handleChange} >
                         <option value = ''>Select an option</option>
                         <option value="2020-12-31">An option</option>
                     </select>
                 </label>
                 <label>
-                    Frequency
+                    Frequency:&nbsp;
                     <input
                     name='frequency'
                     value={form.frequency}

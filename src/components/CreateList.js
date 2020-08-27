@@ -18,6 +18,7 @@ export const CreateList = () => {
         axiosWithAuth()
             .post(`todos/u/${user.userID}/t/${formVal.title.split(' ').join('-')}`, someObj)
             .then(res => {
+                formVal.title.split('-').join(' ')
                 dispatch({ type: CREATE_LIST_SUCCESS, payload: formVal })
                 console.log("CREATE LIST RESPONSE: ", res)
                 setFormVal(initFormVals)
