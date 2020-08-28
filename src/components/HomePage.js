@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { TodosContainer} from './'
+import { TodosContainer } from './'
+
 import fetchAccountDetails from '../utils/fetchAccountDetails'
 import { Link } from "react-router-dom"
 
@@ -12,8 +13,6 @@ export const HomePage = () => {
     const dispatch = useDispatch()
     const user = useSelector( state => state.user)
     // const isLoggedIn = useSelector( state => state.user)
-
-    console.log(user)
 
     useEffect(() => {
         dispatch({ type: LOAD_START })

@@ -14,11 +14,11 @@ import {
     ADD_TODO_START,
     ADD_TODO_SUCCESS,
     ADD_TODO_FAIL,
-    UPDATE_USER
+    UPDATE_USER,
+    EDIT_TODO,
+    DEL_TODO_SUCCESS
     // LOG_OUT,
-    // EDIT_ACCT,
-    // DEL_ACCT,
-} from '..'
+} from '../'
 
 const initialState = {
     user : {
@@ -35,19 +35,7 @@ const initialState = {
     error: ""
 }
 
-// const initTodoValues = {
-//     itemID: "",
-//     name: "",
-//     description: "",
-//     date: "",
-//     frequency: "",
-//     // selected: false,
-
-// }
-
-
 export const reducer = (state = initialState, { type, payload }) => {
-    // const idConditional = !payload.userid ? uuid() : payload.userid;
 
     switch (type) {
         case SIGN_UP_START: 
@@ -95,6 +83,37 @@ export const reducer = (state = initialState, { type, payload }) => {
                     })
                 }
             }
+        case DEL_TODO_SUCCESS:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    todolists: state.user.todolists.map( list => {
+                       if ( list.id === payload.id){
+                           const newList = list.items.filter( function(item) {
+                               return item.name !== payload.name
+                           })
+                           return newList
+                       } else return list
+                })
+            }
+        }
+        // case EDIT_TODO:
+        //     return {
+        //         ...state,
+        //         user: {
+        //             ...state.user,
+        //             todolists: state.user.todolists.map( list => {
+        //                 if (list.title === payload.list){
+        //                     return {
+        //                         ...list, items: [ ...list.items, payload.todoVals]
+        //                     }
+        //                 } else {
+        //                     return list
+        //                 }
+        //             })
+        //         }
+        //     }
         case LOAD_SUCCESS:
             console.log("LOADING PAYLOAD: ", payload)
             return { ...state,
@@ -113,7 +132,23 @@ export const reducer = (state = initialState, { type, payload }) => {
                     ...payload
 				},
 			};
-
+        case EDIT_TODO: 
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    todolists: state.todolists.map( list => {
+                        if ( list.todoid === payload.todoid){
+                            for ( let todo in list ) {
+                                if (todo.itemid === payload.itemid) {
+                                    todo = payload.todo
+                                } else return todo
+                            }
+                            return list
+                        } else return list
+                    })
+                }
+            }
         case LOG_ON_FAIL:
         case SIGN_UP_FAIL :
         case LOAD_FAILURE:
