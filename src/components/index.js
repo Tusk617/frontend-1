@@ -11,4 +11,5 @@ export { PrivateRoute } from './PrivateRoute'
 export { HomePage } from './HomePage'
 export {AddTodo} from './AddTodo'
 export { CreateList } from './CreateList'
+export { DelTodoModal } from './DelTodoModal'
 

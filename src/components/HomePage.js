@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { TodosContainer, AccountSettings, Create} from './'
+import { TodosContainer } from './'
 import fetchAccountDetails from '../utils/fetchAccountDetails'
 
 import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
@@ -10,9 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 export const HomePage = () => {
     const dispatch = useDispatch()
     const user = useSelector( state => state.user)
-    const isLoggedIn = useSelector( state => state.user)
-
-    console.log(user)
+    // const isLoggedIn = useSelector( state => state.user)
 
     useEffect(() => {
         dispatch({ type: LOAD_START })
