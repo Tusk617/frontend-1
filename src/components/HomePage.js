@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { TodosContainer } from './'
+
 import fetchAccountDetails from '../utils/fetchAccountDetails'
+import { Link } from "react-router-dom"
 
 import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,9 +28,9 @@ export const HomePage = () => {
     
     return (
         <div>
-            <h2>Homepage</h2>
-                <TodosContainer todolists={user.todolists}/>
 
+            <h2>{user.firstname}'s Todo Lists</h2>
+                <TodosContainer todolists={user.todolists}/>
         </div>
     )
 }

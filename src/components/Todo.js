@@ -1,8 +1,24 @@
+
 import React, { useState } from 'react'
 import { DelTodoModal } from './'
 import { EDIT_TODO } from '../store'
 import { useDispatch } from 'react-redux'
 import axiosWithAuth from '../utils/axiosWithAuth'
+
+import styled from 'styled-components'
+
+const Container = styled.div`
+    border: 1px dashed white;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0px 0px 12px 0px;
+
+    h4{
+        text-transform:capitalize;
+    }
+`
+
 
 const initEditingVals={
     name: "",
@@ -104,5 +120,6 @@ export const Todo = ({todo}) => {
             }
         </div>
         
+
     )
 }

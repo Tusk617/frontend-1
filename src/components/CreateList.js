@@ -2,6 +2,27 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosWithAuth from '../utils/axiosWithAuth'
 import { CREATE_LIST_START,CREATE_LIST_SUCCESS, CREATE_LIST_FAIL } from '../store'
+import styled from 'styled-components'
+
+const StyledDiv = styled.div`
+    display: flex;
+    width: 30vw;
+    height: auto;
+    border: 2px solid black;
+    font-family: 'Poppins';
+    margin: 2px auto;
+    justify-content: center;
+    border-radius: 10px;
+    h3 {
+        font-family: 'Poppins';
+    }
+    button {
+        margin: 4%;
+        padding: .2% 1%;
+        font-size: 1rem;
+    }
+`
+
 const initFormVals = {
     title : "",
 }
@@ -36,17 +57,22 @@ export const CreateList = () => {
     }
 
     return (
-        <form id="create-list" onSubmit={handleSubmit}>
-            <label htmlFor="title">Your Project: 
-                <input 
-                    name="title"
-                    type="text"
-                    placeholder="What are you working on?"
-                    onChange={handleChanges}
-                    value={formVal.title}
-                />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+       
+            <StyledDiv>
+                <form id="create-list" onSubmit={handleSubmit}>
+                    <label htmlFor="title">
+                        <h3>Create a new List</h3>
+                        <input 
+                            name="title"
+                            type="text"
+                            placeholder="What are you working on?"
+                            onChange={handleChanges}
+                            value={formVal.title}
+                        />
+                    </label>
+                    <button type="submit">Submit</button>
+                </form>
+            </StyledDiv>
+        
     )
 }

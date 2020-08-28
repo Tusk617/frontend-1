@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 // import { LOAD_SUCCESS } from '../store'
  const StyledNav = styled.nav `
     font-size: 1.2rem;
@@ -39,7 +39,7 @@ export const NavigationBar = () => {
                     : <></>
                 }
                 { window.localStorage.getItem("token") ?
-                    <NavLink to="/agenda" > To Do </NavLink>
+                    <NavLink to="/home" > My Lists </NavLink>
                     : <></>
                 }
                 </StyledNav>

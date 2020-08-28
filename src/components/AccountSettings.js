@@ -3,6 +3,39 @@ import { useDispatch, useSelector } from "react-redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from 'react-router-dom'
 import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
+import styled from 'styled-components'
+
+const Container = styled.div`
+    width: 50vw;
+    margin: 20px auto;
+   
+`
+const StyledDetails = styled.div`
+border: 2px solid grey;
+border-radius: 10px;
+padding: 0px 10px 20px;
+`
+const StyledHeader = styled.div`
+background-color:#ebecf0; 
+border-bottom: 1px dashed white;
+height: 4vh;
+border-radius: 10px;
+`
+const StyledButton = styled.div`
+display:flex;
+justify-content: space-evenly;
+button{
+    background-color: #eaeae6; /*gallery*/
+    color: black;
+    padding: .2% 1%;
+    font-size: 1rem;
+};
+button:hover {
+        background-color: #0d857b; /*surfie green*/
+        color: white;
+    };
+
+`
 
 const initialUser = {
     username: '',
@@ -10,6 +43,7 @@ const initialUser = {
     lastname:'',
     email: ''
 }
+
 export const AccountSettings = () => {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -86,15 +120,18 @@ export const AccountSettings = () => {
     }
     return (
         <div>
-            <div>
-                <h2> Account Settings </h2>
+        <h2> Account Settings </h2>
+        <Container>
+            <StyledDetails>
                 <p>Username: {user.username} </p>
                 <p>First Name: {user.firstname}</p>
                 <p>Last Name: {user.lastname}</p>
                 <p>Email: {user.email}</p>
+                <StyledButton>
                 <button onClick={()=> editUser(user)}>Edit Account</button>
                 <button onClick={()=> deleteUser()}>Delete Account</button>
-            </div>
+                </StyledButton>
+            </StyledDetails>
             <br/>
             {editing && (
             <form onSubmit={saveEdit}>
@@ -105,6 +142,7 @@ export const AccountSettings = () => {
                 <button>Update</button>
             </form>
             )} 
-        </div>
+    </Container>
+    </div>
     );
 };
