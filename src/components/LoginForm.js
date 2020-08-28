@@ -8,7 +8,11 @@ import { LOG_ON_START, LOG_ON_SUCCESS, LOG_ON_FAIL } from '../store'
 import axios from 'axios'
 
 const StyledDiv = styled.div`
-    font-family: 'Poppins';
+    border: 2px solid black;
+    width: 30vw;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
     h4 {
         color: #a09f9c; /*mountain mist*/
     };
@@ -22,8 +26,9 @@ const StyledDiv = styled.div`
     button {
         background-color: #eaeae6; /*gallery*/
         color: black;
-        padding: 1.2% 8%;
+        padding: 1% 2%;
         font-size: 1.3rem;
+        /* width: 5vw; */
     }
 
 

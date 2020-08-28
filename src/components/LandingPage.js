@@ -1,26 +1,26 @@
-import React, { useEffect, useContext } from 'react'
-import { useHistory } from "react-router-dom";
-import axiosWithAuth from "../utils/axiosWithAuth";
+// import React from 'react'
+// import { useHistory } from "react-router-dom";
+// // import axiosWithAuth from "../utils/axiosWithAuth";
 
 
-export const LandingPage = () => {
+// export const LandingPage = () => {
 
-    const { location } = useHistory();
-    // const { updateNotes } = useContext();
+//     // const { location } = useHistory();
+//     // const { updateNotes } = useContext();
     
-    // useEffect(() => {
-        // axiosWithAuth()
-        //     .get("/todos")
-        //     .then(res => {
-        //         // updateNotes(res.data)
-        //       } )
-        //     .catch(err => console.log(err.response));
-        //   }, [location]);
+//     // useEffect(() => {
+//         // axiosWithAuth()
+//         //     .get("/todos")
+//         //     .then(res => {
+//         //         // updateNotes(res.data)
+//         //       } )
+//         //     .catch(err => console.log(err.response));
+//         //   }, [location]);
     
-    return (
-        <div>
+//     return (
+//         <div>
 
-        </div>
-    )
-}
+//         </div>
+//     )
+// }
 
