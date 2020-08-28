@@ -9,7 +9,12 @@ import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAIL } from '../store'
 import { useDispatch, useSelector } from 'react-redux'
 
 const StyledDiv = styled.div`
-  font-family: 'Poppins';
+    border: 2px solid black;
+    width: 30vw;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+  
     h4 {
         color: #a09f9c; /*mountain mist*/
     };
