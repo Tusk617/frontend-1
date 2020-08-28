@@ -35,15 +35,15 @@ const initialState = {
     error: ""
 }
 
-const initTodoValues = {
-    itemID: "",
-    name: "",
-    description: "",
-    date: "",
-    frequency: "",
-    // selected: false,
+// const initTodoValues = {
+//     itemID: "",
+//     name: "",
+//     description: "",
+//     date: "",
+//     frequency: "",
+//     // selected: false,
 
-}
+// }
 
 
 export const reducer = (state = initialState, { type, payload }) => {
