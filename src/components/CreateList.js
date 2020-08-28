@@ -1,14 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosWithAuth from '../utils/axiosWithAuth'
-import styled from 'styled-components'
 import { CREATE_LIST_START,CREATE_LIST_SUCCESS, CREATE_LIST_FAIL } from '../store'
-<<<<<<< HEAD
-
-const StyledDiv = styled.div`
-   font-family: 'Poppins';
-    button {
-=======
 import styled from 'styled-components'
 
 const StyledDiv = styled.div`
@@ -25,7 +18,6 @@ const StyledDiv = styled.div`
     }
     button {
         margin: 4%;
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
         padding: .2% 1%;
         font-size: 1rem;
     }
@@ -68,26 +60,6 @@ export const CreateList = () => {
 
 
     return (
-<<<<<<< HEAD
-        <StyledDiv>
-        <form id="create-list" onSubmit={handleSubmit}>
-            <label htmlFor="title"> <p>Your Project:</p> 
-                <input 
-                    name="title"
-                    type="text"
-                    placeholder="What are you working on?"
-                    onChange={handleChanges}
-                    value={formVal.title}
-                />
-            </label>
-            <br/>
-            <br/> 
-            <button type="submit">Submit</button>      
-        </form>
-        </StyledDiv>
-            );
-        }
-=======
        
             <StyledDiv>
                 <form id="create-list" onSubmit={handleSubmit}>
@@ -107,4 +79,3 @@ export const CreateList = () => {
         
     )
 }
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2

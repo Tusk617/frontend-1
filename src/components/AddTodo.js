@@ -1,32 +1,6 @@
 import React, {useState} from 'react'
 import axiosWithAuth from "../utils/axiosWithAuth"
 import { useDispatch } from 'react-redux'
-<<<<<<< HEAD
-import styled from 'styled-components'
-import { ADD_TODO_FAIL, 
-    ADD_TODO_START, 
-    ADD_TODO_SUCCESS} from '../store'
-
-// import { v4 as uuid } from 'uuid'
-
-const StyledDiv = styled.div`
-    font-family: 'Poppins';
-    color: white;
-    position: fixed;
-    background-color: #0d857b;
-    width: 70%;
-    border: 3px solid black;
-    padding: 16px;
-    left: 15%;
-    top: 40%;
-
-    button {
-            padding: .2% 1%;
-            font-size: 1rem;
-        }
-`
-
-=======
 import { 
     // ADD_TODO_FAIL, 
     ADD_TODO_START, 
@@ -62,7 +36,6 @@ import styled from 'styled-components'
       };
      `
  
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
 const initialFormValues={
     name: '',
     description:'',
@@ -104,39 +77,6 @@ export const AddTodo = ({listTitle, todoid}) => {
           console.log(err)
         })
       }
-<<<<<<< HEAD
-
-    return (
-        <StyledDiv>
-            <form onSubmit={handleSubmit}>
-                <h2>Add a new item</h2>
-                <label>
-                    <h4>Name</h4>
-                    <input
-                    name='name'
-                    value={form.name}
-                    onChange={handleChange} >
-                    </input>
-                </label>
-                <label>
-                    <h4>Description</h4>
-                    <textarea
-                    name='description'
-                    value={form.description}
-                    onChange={handleChange} >
-                    </textarea>  
-                </label>
-                <label>
-                    <h4>Due Date</h4>
-                    <p>Input format YYYY-MM-DD</p>
-                    <input
-                    name='duedate'
-                    value={form.duedate}
-                    onChange={handleChange} >
-                    </input>
-                </label>
-                <label>
-=======
       function toggle() {
         const element = document.querySelector("#form");
         element.classList.toggle("hidden");
@@ -178,7 +118,6 @@ export const AddTodo = ({listTitle, todoid}) => {
                 </label>
                     </div>
                     <label>
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
                     <h4>Frequency</h4>
                     <select
                     name='frequency'
@@ -192,16 +131,9 @@ export const AddTodo = ({listTitle, todoid}) => {
                         <option value = 'yearly'>Yearly</option>
                     </select>
                 </label>
-<<<<<<< HEAD
-                <br />
-                <br />
-                <button>Submit</button>
-            </form>
-=======
                     <br/>
                     <button>Submit</button>
                 </form>
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
         </StyledDiv>
     )
 }

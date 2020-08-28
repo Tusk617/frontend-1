@@ -4,7 +4,6 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../store'
-import styled from 'styled-components'
 
 const Container = styled.div`
     width: 50vw;
@@ -21,31 +20,6 @@ background-color:#ebecf0;
 border-bottom: 1px dashed white;
 height: 4vh;
 border-radius: 10px;
-`
-const StyledButton = styled.div`
-display:flex;
-justify-content: space-evenly;
-button{
-    background-color: #eaeae6; /*gallery*/
-    color: black;
-    padding: .2% 1%;
-    font-size: 1rem;
-};
-button:hover {
-        background-color: #0d857b; /*surfie green*/
-        color: white;
-    };
-
-`
-
-const StlyedDiv = styled.div`
-font-Family: 'Poppins';
-`
-
-const StyledDetails = styled.div`
-border: 2px solid black;
-font-size:1.2rem;
-
 `
 const StyledButton = styled.div`
 display:flex;
@@ -144,38 +118,19 @@ export const AccountSettings = () => {
         setUserToEdit ({...userToEdit, [ e.target.name]: e.target.value })
     }
     return (
-<<<<<<< HEAD
-        <StlyedDiv>
-            
-                <div>
-                <h2> Account Settings </h2>
-                 <StyledDetails>
-=======
         <div>
         <h2> Account Settings </h2>
         <Container>
             <StyledDetails>
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
                 <p>Username: {user.username} </p>
                 <p>First Name: {user.firstname}</p>
                 <p>Last Name: {user.lastname}</p>
                 <p>Email: {user.email}</p>
-<<<<<<< HEAD
-                <p>Password: {user.password}</p> 
-                </StyledDetails>
-                <br/>
-=======
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
                 <StyledButton>
                 <button onClick={()=> editUser(user)}>Edit Account</button>
                 <button onClick={()=> deleteUser()}>Delete Account</button>
                 </StyledButton>
-<<<<<<< HEAD
-                </div>
-           
-=======
             </StyledDetails>
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
             <br/>
             {editing && (
             <form onSubmit={saveEdit}>
@@ -186,11 +141,7 @@ export const AccountSettings = () => {
                 <button>Update</button>
             </form>
             )} 
-<<<<<<< HEAD
-        </StlyedDiv>
-=======
     </Container>
     </div>
->>>>>>> fb513db0f4c50956c249821cd2308848fb0d06a2
     );
 };
