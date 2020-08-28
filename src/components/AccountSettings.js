@@ -11,10 +11,7 @@ font-Family: 'Poppins';
 
 const StyledDetails = styled.div`
 border: 2px solid black;
-p:hover{
-    background-color: #283747;
-    color:white;
-}
+font-size:1.2rem;
 
 `
 const StyledButton = styled.div`
